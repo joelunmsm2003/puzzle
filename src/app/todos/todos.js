@@ -4,12 +4,33 @@ var initialTodo = {
   id: 0
 };
 
-function TodoService() {
+host ="http://localhost:8000"
+
+function TodoService($http) {
+
+  $http.get(host+"/hoteles/").success(function(response) {
+
+    console.log('hoteles',response)
+   
+  });
+
+
 }
 
 
 
 TodoService.prototype = {
+
+  listHotels: function(){
+
+    $http.get(host+"/hoteles/").success(function(response) {
+
+    return response
+   
+    });
+
+  },
+
   addTodo: function (text, todos) {
 
     return [

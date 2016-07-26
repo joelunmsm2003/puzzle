@@ -13,7 +13,7 @@ angular
   });
 
 /** @ngInject */
-function TodoTextInput(todoService,hotelService,$window, $timeout) {
+function TodoTextInput(todoService,$window, $timeout) {
   this.$timeout = $timeout;
   this.$window = $window;
   this.todoService = todoService;

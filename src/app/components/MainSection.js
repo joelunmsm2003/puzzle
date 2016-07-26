@@ -12,6 +12,9 @@ angular
 /** @ngInject */
 function MainSection(todoService) {
   this.todoService = todoService;
+
+  console.log('MainSection',todoService)
+
   this.selectedFilter = visibilityFilters[this.filter];
   this.completeReducer = function (count, todo) {
     return todo.completed ? count + 1 : count;
@@ -22,7 +25,6 @@ MainSection.prototype = {
   handleClearCompleted: function () {
     this.todos = this.todoService.clearCompleted(this.todos);
   },
-
   handleCompleteAll: function () {
     this.todos = this.todoService.completeAll(this.todos);
   },
