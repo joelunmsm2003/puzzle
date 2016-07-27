@@ -1,45 +1,140 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'run', 'serve' ]
+1 verbose cli [ '/usr/bin/nodejs',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'gulpjs/gulp-cli#4.0' ]
 2 info using npm@3.5.2
 3 info using node@v4.2.6
-4 verbose run-script [ 'preserve', 'serve', 'postserve' ]
-5 info lifecycle @~preserve: @
-6 silly lifecycle @~preserve: no script for preserve, continuing
-7 info lifecycle @~serve: @
-8 verbose lifecycle @~serve: unsafe-perm in lifecycle true
-9 verbose lifecycle @~serve: PATH: /usr/share/npm/bin/node-gyp-bin:/home/joel/proyectos/choosefe/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-10 verbose lifecycle @~serve: CWD: /home/joel/proyectos/choosefe
-11 silly lifecycle @~serve: Args: [ '-c', 'gulp serve' ]
-12 silly lifecycle @~serve: Returned: code: 1  signal: null
-13 info lifecycle @~serve: Failed to exec serve script
-14 verbose stack Error: @ serve: `gulp serve`
-14 verbose stack Exit status 1
-14 verbose stack     at EventEmitter.<anonymous> (/usr/share/npm/lib/utils/lifecycle.js:232:16)
-14 verbose stack     at emitTwo (events.js:87:13)
-14 verbose stack     at EventEmitter.emit (events.js:172:7)
-14 verbose stack     at ChildProcess.<anonymous> (/usr/share/npm/lib/utils/spawn.js:24:14)
-14 verbose stack     at emitTwo (events.js:87:13)
-14 verbose stack     at ChildProcess.emit (events.js:172:7)
-14 verbose stack     at maybeClose (internal/child_process.js:821:16)
-14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
-15 verbose pkgid @
-16 verbose cwd /home/joel/proyectos/choosefe
-17 error Linux 4.4.0-31-generic
-18 error argv "/usr/bin/nodejs" "/usr/bin/npm" "run" "serve"
-19 error node v4.2.6
-20 error npm  v3.5.2
-21 error code ELIFECYCLE
-22 error @ serve: `gulp serve`
-22 error Exit status 1
-23 error Failed at the @ serve script 'gulp serve'.
-23 error Make sure you have the latest version of node.js and npm installed.
-23 error If you do, this is most likely a problem with the  package,
-23 error not with npm itself.
-23 error Tell the author that this fails on your system:
-23 error     gulp serve
-23 error You can get information on how to open an issue for this project with:
-23 error     npm bugs
-23 error Or if that isn't available, you can get their info via:
-23 error     npm owner ls
-23 error There is likely additional logging output above.
-24 verbose exit [ 1, true ]
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData gulpjs/gulp-cli#4.0
+8 silly fetchOtherPackageData gulpjs/gulp-cli#4.0
+9 silly cache add args [ 'gulpjs/gulp-cli#4.0', null ]
+10 verbose cache add spec gulpjs/gulp-cli#4.0
+11 silly cache add parsed spec Result {
+11 silly cache add   raw: 'gulpjs/gulp-cli#4.0',
+11 silly cache add   scope: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: 'gulpjs/gulp-cli#4.0',
+11 silly cache add   spec: 'github:gulpjs/gulp-cli#4.0',
+11 silly cache add   type: 'hosted',
+11 silly cache add   hosted:
+11 silly cache add    { type: 'github',
+11 silly cache add      ssh: 'git@github.com:gulpjs/gulp-cli.git#4.0',
+11 silly cache add      sshUrl: 'git+ssh://git@github.com/gulpjs/gulp-cli.git#4.0',
+11 silly cache add      httpsUrl: 'git+https://github.com/gulpjs/gulp-cli.git#4.0',
+11 silly cache add      gitUrl: 'git://github.com/gulpjs/gulp-cli.git#4.0',
+11 silly cache add      shortcut: 'github:gulpjs/gulp-cli#4.0',
+11 silly cache add      directUrl: 'https://raw.githubusercontent.com/gulpjs/gulp-cli/4.0/package.json' } }
+12 verbose addRemoteGit caching gulpjs/gulp-cli#4.0
+13 verbose addRemoteGit gulpjs/gulp-cli#4.0 is a repository hosted by github
+14 silly tryGitProto attempting to clone git://github.com/gulpjs/gulp-cli.git#4.0
+15 silly tryClone cloning gulpjs/gulp-cli#4.0 via git://github.com/gulpjs/gulp-cli.git#4.0
+16 verbose tryClone git-github-com-gulpjs-gulp-cli-git-4-0-177dc8bb not in flight; caching
+17 info git [ 'clone',
+17 info git   '--template=/home/joel/.npm/_git-remotes/_templates',
+17 info git   '--mirror',
+17 info git   'git://github.com/gulpjs/gulp-cli.git',
+17 info git   '/home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-177dc8bb' ]
+18 verbose mirrorRemote gulpjs/gulp-cli#4.0 git clone git://github.com/gulpjs/gulp-cli.git
+19 verbose setPermissions gulpjs/gulp-cli#4.0 set permissions on /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-177dc8bb
+20 verbose resolveHead gulpjs/gulp-cli#4.0 original treeish: 4.0
+21 info git [ 'rev-list', '-n1', '4.0' ]
+22 error git rev-list -n1 4.0: fatal: ambiguous argument '4.0': unknown revision or path not in the working tree.
+22 error git rev-list -n1 4.0: Use '--' to separate paths from revisions, like this:
+22 error git rev-list -n1 4.0: 'git <command> [<revision>...] -- [<file>...]'
+23 silly tryHTTPS attempting to clone git+https://github.com/gulpjs/gulp-cli.git#4.0
+24 silly tryClone cloning gulpjs/gulp-cli#4.0 via git+https://github.com/gulpjs/gulp-cli.git#4.0
+25 verbose tryClone git-https-github-com-gulpjs-gulp-cli-git-4-0-4d1486f1 not in flight; caching
+26 info git [ 'clone',
+26 info git   '--template=/home/joel/.npm/_git-remotes/_templates',
+26 info git   '--mirror',
+26 info git   'https://github.com/gulpjs/gulp-cli.git',
+26 info git   '/home/joel/.npm/_git-remotes/git-https-github-com-gulpjs-gulp-cli-git-4-0-4d1486f1' ]
+27 verbose mirrorRemote gulpjs/gulp-cli#4.0 git clone https://github.com/gulpjs/gulp-cli.git
+28 verbose setPermissions gulpjs/gulp-cli#4.0 set permissions on /home/joel/.npm/_git-remotes/git-https-github-com-gulpjs-gulp-cli-git-4-0-4d1486f1
+29 verbose resolveHead gulpjs/gulp-cli#4.0 original treeish: 4.0
+30 info git [ 'rev-list', '-n1', '4.0' ]
+31 error git rev-list -n1 4.0: fatal: ambiguous argument '4.0': unknown revision or path not in the working tree.
+31 error git rev-list -n1 4.0: Use '--' to separate paths from revisions, like this:
+31 error git rev-list -n1 4.0: 'git <command> [<revision>...] -- [<file>...]'
+32 silly trySSH attempting to clone git@github.com:gulpjs/gulp-cli.git#4.0
+33 silly tryClone cloning gulpjs/gulp-cli#4.0 via git@github.com:gulpjs/gulp-cli.git#4.0
+34 verbose tryClone git-github-com-gulpjs-gulp-cli-git-4-0-799725fb not in flight; caching
+35 info git [ 'clone',
+35 info git   '--template=/home/joel/.npm/_git-remotes/_templates',
+35 info git   '--mirror',
+35 info git   'git@github.com:gulpjs/gulp-cli.git',
+35 info git   '/home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb' ]
+36 error git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb: Cloning into bare repository '/home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb'...
+36 error git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb: Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+36 error git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb: Permission denied (publickey).
+36 error git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb: fatal: Could not read from remote repository.
+36 error git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb:
+36 error git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb: Please make sure you have the correct access rights
+36 error git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb: and the repository exists.
+37 silly fetchPackageMetaData Error: Command failed: git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb
+37 silly fetchPackageMetaData Cloning into bare repository '/home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb'...
+37 silly fetchPackageMetaData Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+37 silly fetchPackageMetaData Permission denied (publickey).
+37 silly fetchPackageMetaData fatal: Could not read from remote repository.
+37 silly fetchPackageMetaData
+37 silly fetchPackageMetaData Please make sure you have the correct access rights
+37 silly fetchPackageMetaData and the repository exists.
+37 silly fetchPackageMetaData
+37 silly fetchPackageMetaData     at ChildProcess.exithandler (child_process.js:213:12)
+37 silly fetchPackageMetaData     at emitTwo (events.js:87:13)
+37 silly fetchPackageMetaData     at ChildProcess.emit (events.js:172:7)
+37 silly fetchPackageMetaData     at maybeClose (internal/child_process.js:821:16)
+37 silly fetchPackageMetaData     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+37 silly fetchPackageMetaData  error for gulpjs/gulp-cli#4.0 { [Error: Command failed: git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb
+37 silly fetchPackageMetaData Cloning into bare repository '/home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb'...
+37 silly fetchPackageMetaData Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+37 silly fetchPackageMetaData Permission denied (publickey).
+37 silly fetchPackageMetaData fatal: Could not read from remote repository.
+37 silly fetchPackageMetaData
+37 silly fetchPackageMetaData Please make sure you have the correct access rights
+37 silly fetchPackageMetaData and the repository exists.
+37 silly fetchPackageMetaData ]
+37 silly fetchPackageMetaData   killed: false,
+37 silly fetchPackageMetaData   code: 128,
+37 silly fetchPackageMetaData   signal: null,
+37 silly fetchPackageMetaData   cmd: 'git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb' }
+38 silly rollbackFailedOptional Starting
+39 silly rollbackFailedOptional Finishing
+40 silly runTopLevelLifecycles Starting
+41 silly runTopLevelLifecycles Finishing
+42 silly install printInstalled
+43 verbose stack Error: Command failed: git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb
+43 verbose stack Cloning into bare repository '/home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb'...
+43 verbose stack Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+43 verbose stack Permission denied (publickey).
+43 verbose stack fatal: Could not read from remote repository.
+43 verbose stack
+43 verbose stack Please make sure you have the correct access rights
+43 verbose stack and the repository exists.
+43 verbose stack
+43 verbose stack     at ChildProcess.exithandler (child_process.js:213:12)
+43 verbose stack     at emitTwo (events.js:87:13)
+43 verbose stack     at ChildProcess.emit (events.js:172:7)
+43 verbose stack     at maybeClose (internal/child_process.js:821:16)
+43 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+44 verbose cwd /home/joel/proyectos/choosefe
+45 error Linux 4.4.0-31-generic
+46 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "-g" "gulpjs/gulp-cli#4.0"
+47 error node v4.2.6
+48 error npm  v3.5.2
+49 error code 128
+50 error Command failed: git clone --template=/home/joel/.npm/_git-remotes/_templates --mirror git@github.com:gulpjs/gulp-cli.git /home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb
+50 error Cloning into bare repository '/home/joel/.npm/_git-remotes/git-github-com-gulpjs-gulp-cli-git-4-0-799725fb'...
+50 error Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+50 error Permission denied (publickey).
+50 error fatal: Could not read from remote repository.
+50 error
+50 error Please make sure you have the correct access rights
+50 error and the repository exists.
+51 error If you need help, you may report this error at:
+51 error     <https://github.com/npm/npm/issues>
+52 verbose exit [ 1, true ]
