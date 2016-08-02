@@ -1,0 +1,10 @@
+@import "variables";
+@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap.scss";
+
+
+@import "component/filtro/filtro";
+@import "component/header/header";
+@import "component/home/home";
+@import "component/listhoteldetail/listhoteldetail";
+@import "component/listhotels/listhotels";
+@import "component/login/login";

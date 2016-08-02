@@ -1,0 +1,45 @@
+
+
+
+
+<div class = "panel panel-default">
+   <div class = "panel-body">
+
+
+
+  <div ng-repeat="chip in chips" class="data">
+
+   <div class="chip" ng-class="{city: chip.categoria === 'City'}">
+		<img src="{{chip.photo__url}}" alt="Person" width="96" height="96">
+		 {{chip.name}}
+	
+
+    <i ng-click="add(chip,$index)" class="fa fa-times" aria-hidden="true"></i>
+		</div>
+
+  </div>
+
+		
+		<input ng-change="search()"  type="text" ng-model="tipo" placeholder="Add More..">
+
+    <img src="/dist/img/search_home@2x.png" ng-click="search_hotels()" ng-class="{active: hover,city}">
+
+
+   </div>
+</div>
+
+
+
+
+<ul class="list-group">
+
+  <li ng-show='fil' ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="list-group-item" ng-class="{active: hover,city: contact.categoria === 'City',interes: contact.categoria === 'Interes'}" ng-repeat="contact in datax " ng-click="addchip(contact,$index)">
+
+
+   <span><img src="{{contact.photo__url}}" class="img-responsive chip1" alt="Cinque Terre"></span> {{contact.name}} 
+
+  </li>
+
+</ul>
+
+

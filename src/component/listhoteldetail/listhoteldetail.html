@@ -1,0 +1,23 @@
+
+
+ <div class="col-md-4">
+
+            <div class="thumbnail">
+                <img src="{{hotel.photo__url}}" class="">
+                <div class="caption">
+                     <h4 class="">{{hotel.name}}</h4>
+
+                 
+
+						
+						<div class="star" ng-repeat="a in range(hotel.star) track by $index"><img src="/dist/img/star.png" ></div>
+						
+
+					<p class="">{{hotel.address}}, {{hotel.city__name}}
+					</p> 
+
+					 <a href="#" class="btn btn-default btn-xs" role="button">More Info</a>
+
+                </div>
+            </div>
+ </div>

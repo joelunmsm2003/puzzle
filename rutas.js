@@ -1,7 +1,11 @@
 angular
   .module('app', ['ui.router','ngStorage','pascalprecht.translate'])
   .service('interesService', interesService)
+  .service('hotelsService', hotelsService)
   .config(routesConfig);
+
+
+host = 'http://localhost:8000/' 
 
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$httpProvider,$translateProvider) {
