@@ -39,24 +39,37 @@ angular
 
 host = 'http://localhost:8000/' 
 
+var lang = 'es'
+
+
+
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$httpProvider,$translateProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.otherwise('/');
 
+
   // Languages
 
-  $translateProvider.translations('en', {
-    'TITLE': 'Hello',
-    'FOO': 'This is a paragraph'
+  $.get("es.json", function(data){
+
+  console.log(data)
+
+  $translateProvider.translations('es',data);
+         
   });
- 
-  $translateProvider.translations('de', {
-    'TITLE': 'Hallo',
-    'FOO': 'Dies ist ein Absatz'
+
+  $.get("en.json", function(data){
+
+  console.log(data)
+
+  $translateProvider.translations('en',data);
+         
   });
+
+
  
-  $translateProvider.preferredLanguage('de');
+  $translateProvider.preferredLanguage(lang);
 
 
   $stateProvider
@@ -104,9 +117,31 @@ angular
 
 function Header($translate,$scope){
 
+
+	$scope.language = "Español"
+
+
+
   $scope.changeLanguage = function (langKey) {
+
+  	console.log(langKey)
+
+  	if(langKey == 'es'){
+
+  		$scope.language = "Español"
+  	}
+  	else{
+
+  		$scope.language = "English"
+  	}
+
+
+
     $translate.use(langKey);
+
   };
+
+  
   
 }
 angular

@@ -7,8 +7,30 @@ angular
 
 function Header($translate,$scope){
 
+
+	$scope.language = "Español"
+
+
+
   $scope.changeLanguage = function (langKey) {
+
+  	console.log(langKey)
+
+  	if(langKey == 'es'){
+
+  		$scope.language = "Español"
+  	}
+  	else{
+
+  		$scope.language = "English"
+  	}
+
+
+
     $translate.use(langKey);
+
   };
+
+  
   
 }

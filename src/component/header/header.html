@@ -10,7 +10,7 @@
         <div class="col-sm-12 rectangle2">
             <div class="row">
 
-                <div class="col-sm-8"><img src="component/header/logo.png" class="logo animated bounceIn"></img>
+                <div class="col-sm-8"><img src="/dist/img/logo@2x.png"  class="logo animated bounceIn img-responsive"></img>
                 </div>
 
                 <div class="col-sm-4 button-header">
@@ -30,20 +30,26 @@
                 <div class="dropdown">
                
                 <button class="btn btn-default dropdown-toggle" type="button" id="language" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                English
+                {{language}}
                 <span class="caret"></span>
                 </button>
+
+                <!--<button ng-click="changeLanguage('de')" translate="Aleman" class="btn btn-default"></button>
+                <button ng-click="changeLanguage('en')" translate="English" class="btn btn-default"></button>-->
+
+
                 <ul class="dropdown-menu" aria-labelledby="language">
-                <li><a href="#">Spanish</a></li>
+                <li ng-click="changeLanguage('es')" ><a href="#">Spanish</a></li>
+                <li ng-click="changeLanguage('en')" ><a href="#">English</a></li>
                 </ul>
 
             
 
                 </div>
 
-                <button type="button" class="btn btn-default"><i class="fa fa-user" aria-hidden="true"></i> My Account </button>
+                <button type="button" class="btn btn-default"><i class="fa fa-user" aria-hidden="true"></i> {{'Cuenta'|translate}} </button>
 
-
+                {{ 'TITLE' | translate }}
                  
                   
 

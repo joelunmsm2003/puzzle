@@ -122,6 +122,8 @@ gulp.task('watch', function() {
 	// Watch site-js files
 	gulp.watch('./src/**/*.js', ['app-js']);
 
+	gulp.watch('rutas.js', ['app-js']);
+
 	// Watch vendor-js files
 	gulp.watch('./bower_components/**/*.js', ['vendor-js']);
 
