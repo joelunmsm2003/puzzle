@@ -10,6 +10,11 @@
     font-family: Open;
   }
 
+  .filtro{
+
+    padding: 5em;
+    text-align: center;
+  }
 
 
   .data{
@@ -18,7 +23,6 @@
   }
   
   .chip {
-
 
     font-family: Open;
     display: inline-block;
@@ -32,7 +36,7 @@
     margin: 6px;
 
     
-}
+   }
 
   .chip:hover {
     display: inline-block;

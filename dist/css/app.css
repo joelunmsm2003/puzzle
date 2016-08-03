@@ -5749,6 +5749,10 @@ button.close {
 body {
   font-family: Open; }
 
+.filtro {
+  padding: 5em;
+  text-align: center; }
+
 .data {
   display: inline-block; }
 
@@ -5824,7 +5828,6 @@ input[type="text"].focus,
   margin-bottom: -1px; }
 
 .header {
-  height: 675px;
   background: url("/component/header/header.jpg") no-repeat;
   background-size: cover;
   -o-background-size: cover; }

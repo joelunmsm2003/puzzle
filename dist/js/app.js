@@ -76,6 +76,10 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
     .state('app', {
       url: '/',
       template: '<home></home>'
+    })
+    .state('web', {
+      url: '/web/:hoteles',
+      template: '<web></web>'
     });
     
 
@@ -110,53 +114,22 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
 
 angular
   .module('app')
-  .component('header', {
-    templateUrl: 'src/component/header/header.html',
-    controller: Header
-  });
-
-function Header($translate,$scope){
-
-
-	$scope.language = "Español"
-
-
-
-  $scope.changeLanguage = function (langKey) {
-
-  	console.log(langKey)
-
-  	if(langKey == 'es'){
-
-  		$scope.language = "Español"
-  	}
-  	else{
-
-  		$scope.language = "English"
-  	}
-
-
-
-    $translate.use(langKey);
-
-  };
-
-  
-  
-}
-angular
-  .module('app')
   .component('filtro', {
     templateUrl: 'src/component/filtro/filtro.html',
-    controller: Filtro
+    controller: Filtro,
+    bindings: {
+      interes: '='
+    }
   });
 
 function Filtro(interesService,$scope,$filter,$http) {
 
+
     $scope.fil = false
 
-	  interesService.getAll().then(function(data) {
+    console.log('$scope.datainteres',this.interes)
 
+	  interesService.getAll().then(function(data) {
 
     console.log('hshhs',data)
 
@@ -210,9 +183,6 @@ function Filtro(interesService,$scope,$filter,$http) {
     };
 
     
-
-
-
     $scope.search_hotels = function() {
 
 
@@ -228,7 +198,9 @@ function Filtro(interesService,$scope,$filter,$http) {
       success(function(data) {
 
 
-        consoel.log(data)
+        console.log('Resultados....',data)
+
+        $scope.resultados = data
 
 
       })
@@ -236,13 +208,6 @@ function Filtro(interesService,$scope,$filter,$http) {
   
     };
 
-
-
-
-
-
-
-    $scope.fer ='jsjsjsj'
 
     $scope.filmouse = function (data) {
 
@@ -275,13 +240,95 @@ function Filtro(interesService,$scope,$filter,$http) {
 
 angular
   .module('app')
+  .component('header', {
+    templateUrl: 'src/component/header/header.html',
+    controller: Header
+  });
+
+function Header($translate,$scope){
+
+
+	$scope.language = "Español"
+
+
+
+  $scope.changeLanguage = function (langKey) {
+
+  	console.log(langKey)
+
+  	if(langKey == 'es'){
+
+  		$scope.language = "Español"
+  	}
+  	else{
+
+  		$scope.language = "English"
+  	}
+
+
+
+    $translate.use(langKey);
+
+  };
+
+  
+  
+}
+angular
+  .module('app')
   .service('interesService', interesService)
   .component('home', {
     templateUrl: 'src/component/home/home.html',
     controller: App
   });
 
-function App(){
+function App(interesService,$translate,$scope){
+
+	$translate.use('es');
+
+	
+    interesService.getAll().then(function(data) {
+
+    $scope.intereses = data.data
+
+    console.log('Dato Django....',typeof($scope.intereses),$scope.intereses)
+
+
+
+	console.log('Dato Django....1', Object.keys($scope.intereses).map(function (key) {return $scope.intereses[key]}));
+
+
+      
+    })
+
+	
+
+	var interes = [
+
+	{
+	id: 1,
+	categoria: 'City',
+	interes: 'Lima',
+	},
+	{
+	id: 2,
+	categoria: 'Interes',
+	interes: 'Natacion',
+	},
+	{
+	id: 3,
+	categoria: 'City',
+	interes: 'Cuzco',
+	},
+
+	];
+
+	this.interes = interes
+
+	console.log('Dato Example....',typeof(this.interes),this.interes)
+
+	
+	
   
 }
 angular
@@ -407,4 +454,40 @@ function Login($scope,$filter,$http,$rootScope,$location,$localStorage) {
 
 
       
+}
+
+angular
+  .module('app')
+  .component('search', {
+    templateUrl: 'src/component/search/search.html',
+    controller: Search
+  });
+
+/** @ngInject */
+function Search($scope) {
+
+
+
+
+}
+
+
+
+
+angular
+  .module('app')
+  .service('interesService', interesService)
+  .component('web', {
+    templateUrl: 'src/component/web/web.html',
+    controller: Web
+  });
+
+function Web($scope,$stateParams){
+
+	console.log('Web',$stateParams)
+
+
+
+
+  
 }

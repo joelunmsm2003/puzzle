@@ -46,7 +46,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
       template: '<home></home>'
     })
     .state('web', {
-      url: '/web',
+      url: '/web/:hoteles',
       template: '<web></web>'
     });
     

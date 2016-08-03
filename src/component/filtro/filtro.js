@@ -2,15 +2,20 @@ angular
   .module('app')
   .component('filtro', {
     templateUrl: 'src/component/filtro/filtro.html',
-    controller: Filtro
+    controller: Filtro,
+    bindings: {
+      interes: '='
+    }
   });
 
 function Filtro(interesService,$scope,$filter,$http) {
 
+
     $scope.fil = false
 
-	  interesService.getAll().then(function(data) {
+    console.log('$scope.datainteres',this.interes)
 
+	  interesService.getAll().then(function(data) {
 
     console.log('hshhs',data)
 
@@ -64,9 +69,6 @@ function Filtro(interesService,$scope,$filter,$http) {
     };
 
     
-
-
-
     $scope.search_hotels = function() {
 
 
@@ -82,7 +84,9 @@ function Filtro(interesService,$scope,$filter,$http) {
       success(function(data) {
 
 
-        consoel.log(data)
+        console.log('Resultados....',data)
+
+        $scope.resultados = data
 
 
       })
@@ -90,13 +94,6 @@ function Filtro(interesService,$scope,$filter,$http) {
   
     };
 
-
-
-
-
-
-
-    $scope.fer ='jsjsjsj'
 
     $scope.filmouse = function (data) {
 
