@@ -1,5 +1,11 @@
 {
 
     "TITULO": "YOU choose it, WE book it.",
-    "SUBTITULO": "Where would you like to go?"
+    "SUBTITULO": "Where would you like to go?",
+    "ADULTS": "Adults",
+	"CHILDRENS": "Childrens",
+	"ROOMS": "Rooms",
+	"CHECKIN": "Checkin",
+	"CHECKOUT": "Checkout",
+	"CUENTA": "Login"
 }

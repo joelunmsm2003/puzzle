@@ -5,7 +5,7 @@ angular
     controller: Login
   });
 
-function Login($scope,$filter,$http,$rootScope,$location,$localStorage) {
+function Login($scope,$translate,$filter,$http,$rootScope,$location,$localStorage) {
 
 
 	  function urlBase64Decode(str) {

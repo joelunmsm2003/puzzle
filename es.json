@@ -1,5 +1,11 @@
 {
  
 	"TITULO": "Tu eliges, Nosotros reservamos",
-	"SUBTITULO": "Donde te gustaria ir ?"
+	"SUBTITULO": "Donde te gustaria ir ?",
+	"ADULTS": "Adultos",
+	"CHILDRENS": "Niños",
+	"ROOMS": "Habitaciones",
+	"CHECKIN": "Checkin",
+	"CHECKOUT": "Checkout",
+	"CUENTA": "Iniciar"
 }

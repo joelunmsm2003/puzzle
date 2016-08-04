@@ -69,8 +69,10 @@ gulp.task('vendor-js', function() {
     './bower_components/ngstorage/ngStorage.js',
     './bower_components/jquery/dist/jquery.js',
     './bower_components/bootstrap/dist/js/bootstrap.js',
-    './bower_components/angular-translate/angular-translate.js'
-
+    './bower_components/angular-translate/angular-translate.js',
+    './bower_components/angular-animate/angular-animate.js',
+    './bower_components/angular-touch/angular-touch.js',
+    './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
 
 
 				

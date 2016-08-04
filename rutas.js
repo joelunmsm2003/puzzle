@@ -1,8 +1,9 @@
 angular
-  .module('app', ['ui.router','ngStorage','pascalprecht.translate'])
+  .module('app', ['ui.router','ngStorage','pascalprecht.translate','ui.bootstrap','ngAnimate','ngTouch'])
   .service('interesService', interesService)
   .service('hotelsService', hotelsService)
-  .config(routesConfig);
+  .config(routesConfig)
+
 
 
 host = 'http://localhost:8000/' 
@@ -16,6 +17,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
   $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.otherwise('/');
 
+ 
 
   // Languages
 

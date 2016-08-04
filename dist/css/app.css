@@ -1,7 +1,15 @@
 @charset "UTF-8";
 @font-face {
   font-family: Galano;
-  src: url(/bower_components/galano/Extra_Light.otf); }
+  src: url(/bower_components/galano/galano.otf); }
+
+@font-face {
+  font-family: Galanobold;
+  src: url(/bower_components/galano/bold.otf); }
+
+@font-face {
+  font-family: Galanodemobold;
+  src: url(/bower_components/galano/demobold.otf); }
 
 @font-face {
   font-family: Open;
@@ -5738,20 +5746,10 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-@font-face {
-  font-family: Galano;
-  src: url(/bower_components/galano/Extra_Light.otf); }
-
-@font-face {
-  font-family: Open;
-  src: url(/bower_components/open-sans-fontface/fonts/Regular/OpenSans-Regular.ttf); }
-
-body {
-  font-family: Open; }
-
 .filtro {
   padding: 5em;
-  text-align: center; }
+  text-align: center;
+  font-family: Open; }
 
 .data {
   display: inline-block; }
@@ -5760,9 +5758,9 @@ body {
   font-family: Open;
   display: inline-block;
   padding: 0 25px;
-  height: 28.5px;
+  height: 40px;
   font-size: 16px;
-  line-height: 28.5px;
+  line-height: 40px;
   border-radius: 25px;
   background-color: #ffd8b2;
   color: #487c8c;
@@ -5771,34 +5769,38 @@ body {
 .chip:hover {
   display: inline-block;
   padding: 0 25px;
-  height: 28.5px;
+  height: 40px;
   font-size: 16px;
-  line-height: 28.5px;
+  line-height: 40px;
   background-color: #f1f1f1;
-  cursor: pointer; }
+  cursor: pointer;
+  font-family: Open; }
 
 .chip1 {
   display: inline-block;
   /* padding: 0 25px; */
-  height: 28.5px;
+  height: 40px;
   font-size: 16px;
-  line-height: 28.5px;
+  line-height: 40px;
   border-radius: 25px;
   background-color: #f1f1f1;
+  font-family: Open;
   font-family: Open; }
 
 .chip img {
   float: left;
   margin: 0 10px 0 -25px;
-  height: 28.5px;
-  width: 28.5px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%; }
 
 .city {
-  background: #ebf1c3; }
+  background: #ebf1c3;
+  font-family: Open; }
 
 .interes {
-  background: #ffd8b2; }
+  background: #ffd8b2;
+  font-family: Open; }
 
 input[type="text"] {
   display: inline-block;
@@ -5835,18 +5837,28 @@ input[type="text"].focus,
 .rectangle1 {
   background-color: #00A1E1;
   width: 100%;
-  height: 8.5px; }
+  height: 5px; }
 
 .rectangle2 {
   height: 131px;
   background-color: #fff; }
 
 .button-header {
-  margin-top: 12px; }
+  margin-top: 12px;
+  margin-top: 12px;
+  text-align: center; }
 
 .dropdown {
   display: inline-block; }
 
 /*# sourceMappingURL=header.css.map */
+.title {
+  font-family: Galanobold;
+  font-size: 55px; }
+
+.subtitle {
+  font-family: Galano;
+  font-size: 38px; }
+
 .star {
   display: inline-block; }

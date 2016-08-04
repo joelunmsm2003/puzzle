@@ -2,6 +2,8 @@
 
 
 
+
+
 <div class = "panel panel-default">
    <div class = "panel-body">
 
@@ -32,9 +34,6 @@
 </div>
 
 
-
-    Resultados {{resultados}}
-
 <ul class="list-group">
 
   <li ng-show='fil' ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="list-group-item" ng-class="{active: hover,city: contact.categoria === 'City',interes: contact.categoria === 'Interes'}" ng-repeat="contact in datax " ng-click="addchip(contact,$index)">
@@ -45,5 +44,31 @@
   </li>
 
 </ul>
+
+
+<search></search>
+
+<div class="row">
+
+<div class="col-sm-4">
+
+<div class = "panel panel-default">
+   <div class = "panel-body">
+
+<searchvert></searchvert>
+
+</div>
+</div>
+  
+</div>
+<div class="col-sm-8">
+
+<listhoteldetail ng-repeat="item in hotels" hotels="item" ></listhoteldetail>
+
+
+
+
+</div>
+
 
 

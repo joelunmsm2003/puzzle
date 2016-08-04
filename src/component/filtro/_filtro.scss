@@ -1,19 +1,10 @@
-@font-face {
-  font-family: Galano;
-  src: url(/bower_components/galano/Extra_Light.otf); }
-@font-face {
-  font-family: Open;
-  src: url(/bower_components/open-sans-fontface/fonts/Regular/OpenSans-Regular.ttf); }
 
-  body{
-
-    font-family: Open;
-  }
 
   .filtro{
 
     padding: 5em;
     text-align: center;
+    font-family: Open;
   }
 
 
@@ -24,12 +15,13 @@
   
   .chip {
 
+
     font-family: Open;
     display: inline-block;
     padding: 0 25px;
-    height: 28.5px;
+    height: 40px;;
     font-size: 16px;
-    line-height: 28.5px;
+    line-height: 40px;;
     border-radius: 25px;
     background-color: #ffd8b2;
     color: #487c8c;
@@ -41,21 +33,23 @@
   .chip:hover {
     display: inline-block;
     padding: 0 25px;
-    height: 28.5px;
+    height: 40px;;
     font-size: 16px;
-    line-height: 28.5px;
+    line-height: 40px;;
     background-color: #f1f1f1;
     cursor:pointer;
+    font-family: Open;
 
 }
   .chip1 {
     display: inline-block;
     /* padding: 0 25px; */
-    height: 28.5px;
+    height: 40px;;
     font-size: 16px;
-    line-height: 28.5px;
+    line-height: 40px;;
     border-radius: 25px;
     background-color: #f1f1f1;
+    font-family: Open;
     font-family: Open;
 }
 
@@ -66,8 +60,8 @@
 .chip img {
     float: left;
     margin: 0 10px 0 -25px;
-    height: 28.5px;
-    width: 28.5px;
+    height: 40px;;
+    width: 40px;;
     border-radius: 50%;
 }
 
@@ -75,12 +69,14 @@
 .city{
 
   background: #ebf1c3;
+  font-family: Open;
 
 }
 
 .interes {
 
   background: #ffd8b2;
+  font-family: Open;
  
 }
 

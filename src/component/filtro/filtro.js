@@ -1,5 +1,6 @@
 angular
   .module('app')
+  .service('interesService', interesService)
   .component('filtro', {
     templateUrl: 'src/component/filtro/filtro.html',
     controller: Filtro,
@@ -8,7 +9,17 @@ angular
     }
   });
 
-function Filtro(interesService,$scope,$filter,$http) {
+function Filtro(hotelsService,interesService,$scope,$filter,$http) {
+
+
+
+    hotelsService.getAll().then(function(data) {
+
+    console.log('hoteles',data)
+
+    $scope.hotels = data.data
+
+    })
 
 
     $scope.fil = false
@@ -86,7 +97,7 @@ function Filtro(interesService,$scope,$filter,$http) {
 
         console.log('Resultados....',data)
 
-        $scope.resultados = data
+        $scope.hotels = data
 
 
       })
