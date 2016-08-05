@@ -16,6 +16,31 @@ class hotelsService {
 
 host = 'http://localhost:8000/' 
 
+function interesService ($http,$q) {  
+    return {
+        getAll: getAll
+    }
+
+    function getAll () {
+
+        var defered = $q.defer();
+        var promise = defered.promise;
+
+        $http.get(host+'cities/interest/')
+            .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
+            });
+
+        return promise;
+    }
+}
+
+
+/*
+
 class interesService {
   
     constructor($http) {
@@ -27,7 +52,7 @@ class interesService {
     }
 }
 
-
+*/
 
 
 angular
@@ -129,6 +154,13 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
 
 
 
+    console.log('Filtro..',this.interes)
+
+
+    $scope.dag = [2,3,4]
+
+
+
     hotelsService.getAll().then(function(data) {
 
     console.log('hoteles',data)
@@ -146,9 +178,9 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
 
     console.log('hshhs',data)
 
-    $scope.datax1 = data.data
+    $scope.datax1 = data
 
-    $scope.datax = data.data
+    $scope.datax = data
             
     })
 
@@ -295,21 +327,31 @@ angular
     controller: App
   });
 
-function App(interesService,$translate,$scope){
+function App(interesService,$translate,$scope,$http,$q){
 
 	$translate.use('es');
+
+	var defered = $q.defer();
+	var promise = defered.promise;
+
+
+
+	$http.get('http://jsonplaceholder.typicode.com/users')
+	.success(function(data) {
+		defered.resolve(data);
+	})
+    .error(function(err) {
+        defered.reject(err)
+    });
+
+
 
 	
     interesService.getAll().then(function(data) {
 
     $scope.intereses = data.data
 
-    console.log('Dato Django....',typeof($scope.intereses),$scope.intereses)
-
-
-
-	console.log('Dato Django....1', Object.keys($scope.intereses).map(function (key) {return $scope.intereses[key]}));
-
+ 
 
       
     })
@@ -336,7 +378,7 @@ function App(interesService,$translate,$scope){
 
 	];
 
-	this.interes = interes
+	this.interes = promise
 
 	console.log('Dato Example....',typeof(this.interes),this.interes)
 
@@ -599,7 +641,10 @@ angular
   .module('app')
   .component('searchvert', {
     templateUrl: 'src/component/searchvertical/searchvertical.html',
-    controller: Searchvertical
+    controller: Searchvertical,
+    bindings: {
+      hotels: '='
+    }
   });
 
 
@@ -609,31 +654,11 @@ angular
 function Searchvertical($scope,$translate) {
 
 
-   $scope.ninos = {
-    model: null,
-    availableOptions: [
-      {id: '1', name: '1'},{id: '2', name: '2'},{id: '3', name: '3'},{id: '4', name: '4'},{id: '5', name: '5'},{id: '6', name: '6'},
-      {id: '7', name: '7'},{id: '8', name: '8'},{id: '9', name: '9'}
-    ],
-   };
+  console.log('Searchvertical',this.hotels)
 
-    $scope.adultos = {
-    model: null,
-    availableOptions: [
-      {id: '1', name: '1'},{id: '2', name: '2'},{id: '3', name: '3'},{id: '4', name: '4'},{id: '5', name: '5'},{id: '6', name: '6'},{id: '7', name: '7'},
-      {id: '8', name: '8'},{id: '9', name: '9'},{id: '10', name: '10'},{id: '11', name: '11'},{id: '12', name: '12'},{id: '13', name: '13'},{id: '14', name: '14'},
-      {id: '15', name: '15'},{id: '16', name: '16'}
-    ],
-   };
+  $scope.vertical = this.hotels
 
-   $scope.rooms = {
-    model: null,
-    availableOptions: [
-      {id: '1', name: '1'},{id: '2', name: '2'},{id: '3', name: '3'},{id: '4', name: '4'},{id: '5', name: '5'},{id: '6', name: '6'},{id: '7', name: '7'},
-      {id: '8', name: '8'},{id: '9', name: '9'},{id: '10', name: '10'},{id: '11', name: '11'},{id: '12', name: '12'},{id: '13', name: '13'},{id: '14', name: '14'},
-      {id: '15', name: '15'},{id: '16', name: '16'}
-    ],
-   };
+  $scope.vertical.push(23)
 
 
 

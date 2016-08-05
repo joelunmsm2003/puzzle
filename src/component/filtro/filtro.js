@@ -13,6 +13,13 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
 
 
 
+    console.log('Filtro..',this.interes)
+
+
+    $scope.dag = [2,3,4]
+
+
+
     hotelsService.getAll().then(function(data) {
 
     console.log('hoteles',data)
@@ -30,9 +37,9 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
 
     console.log('hshhs',data)
 
-    $scope.datax1 = data.data
+    $scope.datax1 = data
 
-    $scope.datax = data.data
+    $scope.datax = data
             
     })
 

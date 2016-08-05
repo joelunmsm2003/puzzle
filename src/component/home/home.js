@@ -6,21 +6,31 @@ angular
     controller: App
   });
 
-function App(interesService,$translate,$scope){
+function App(interesService,$translate,$scope,$http,$q){
 
 	$translate.use('es');
+
+	var defered = $q.defer();
+	var promise = defered.promise;
+
+
+
+	$http.get('http://jsonplaceholder.typicode.com/users')
+	.success(function(data) {
+		defered.resolve(data);
+	})
+    .error(function(err) {
+        defered.reject(err)
+    });
+
+
 
 	
     interesService.getAll().then(function(data) {
 
     $scope.intereses = data.data
 
-    console.log('Dato Django....',typeof($scope.intereses),$scope.intereses)
-
-
-
-	console.log('Dato Django....1', Object.keys($scope.intereses).map(function (key) {return $scope.intereses[key]}));
-
+ 
 
       
     })
@@ -47,7 +57,7 @@ function App(interesService,$translate,$scope){
 
 	];
 
-	this.interes = interes
+	this.interes = promise
 
 	console.log('Dato Example....',typeof(this.interes),this.interes)
 
