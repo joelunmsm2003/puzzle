@@ -1,12 +1,8 @@
 
-
-
-
-
-
 <div class = "panel panel-default">
-   <div class = "panel-body">
 
+
+   <div class = "panel-body">
 
 
   <div ng-repeat="chip in chips" class="data">
@@ -34,7 +30,7 @@
 </div>
 
 
-<ul class="list-group">
+<ul ng-show = "listgroup" class="list-group">
 
   <li ng-show='fil' ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="list-group-item" ng-class="{active: hover,city: contact.categoria === 'City',interes: contact.categoria === 'Interes'}" ng-repeat="contact in datax " ng-click="addchip(contact,$index)">
 
@@ -46,32 +42,54 @@
 </ul>
 
 
-<search></search>
+ <listhoteldetail ng-show = "filtropri" ng-repeat="item in hotels" hotels="item" ></listhoteldetail>
 
-<div class="row">
+
+
+
+
+<web ng-show="web" hotels="$ctrl.hoteles" chips1='chips'></web>
+
+
+<!--<div class="row">
 
 <div class="col-sm-4">
 
-<div class = "panel panel-default">
-   <div class = "panel-body">
+    <div class = "panel panel-default">
+       <div class = "panel-body">
 
 
-   Filttro{{dag}}
+        <searchvert hotels="$ctrl.hoteles" chips='chips'></searchvert>
 
-<searchvert hotels="dag"></searchvert>
-
-</div>
-</div>
+        </div>
+    </div>
   
 </div>
+
 <div class="col-sm-8">
 
-<listhoteldetail ng-repeat="item in hotels" hotels="item" ></listhoteldetail>
+      <div class='row'>
 
+      <div class="col-sm-12">
 
+      <listhoteldetail ng-show = "filtropri" ng-repeat="item in hotels" hotels="item" ></listhoteldetail>
 
+      </div>
+
+      <div class="col-sm-12">
+
+      <listhotels ng-show = "filtrosec" data="$ctrl.hoteles"></listhotels>
+
+      </div>
+
+      </div>
+
+      
 
 </div>
+
+
+</div>-->
 
 
 

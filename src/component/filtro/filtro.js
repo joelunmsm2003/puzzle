@@ -9,33 +9,44 @@ angular
     }
   });
 
-function Filtro(hotelsService,interesService,$scope,$filter,$http) {
+function Filtro(hotelsService,interesService,$scope,$filter,$http,$q) {
+
+
+    var defered = $q.defer();
+
+    var promise = defered.promise;
+
+    $scope.filtropri = true
+
+    $scope.filtrosec = false
+
+    $scope.resultaconteo = false
+
+    $scope.listgroup = true
+
+    $scope.web = false
 
 
 
-    console.log('Filtro..',this.interes)
+    $http.get(host+'hotel/').success(function(data) {
 
+    console.log('Hotel Primera Busqueda',data)
 
-    $scope.dag = [2,3,4]
+    $scope.hotels = data
 
-
-
-    hotelsService.getAll().then(function(data) {
-
-    console.log('hoteles',data)
-
-    $scope.hotels = data.data
 
     })
 
+    this.hoteles = promise
+
+    
+ 
 
     $scope.fil = false
 
-    console.log('$scope.datainteres',this.interes)
 
 	  interesService.getAll().then(function(data) {
 
-    console.log('hshhs',data)
 
     $scope.datax1 = data
 
@@ -48,8 +59,6 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
 
      $scope.addchip = function (data,index) {
 
-      console.log('index',index)
-
       $scope.chips.push(data)
 
       $scope.datax.splice(index,1)
@@ -59,7 +68,6 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
 
     $scope.add = function(data,index){
 
-      console.log('ajajaj',data)
 
       $scope.chips.splice(index,1)
 
@@ -90,27 +98,18 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
     $scope.search_hotels = function() {
 
 
-      console.log('Searching.......',$scope.chips)
+      $scope.resultaconteo = true
 
-      $http({
+      $scope.listgroup = false
 
-      url: host+"hotel/search/",
-      data: $scope.chips,
-      method: 'POST'
+      $scope.web = true
 
-      }).
-      success(function(data) {
-
-
-        console.log('Resultados....',data)
-
-        $scope.hotels = data
-
-
-      })
+      $scope.filtropri = false
 
   
     };
+
+   
 
 
     $scope.filmouse = function (data) {
@@ -120,6 +119,9 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
     }
 
     $scope.search = function () {
+
+
+       $scope.listgroup = true
 
       
         console.log('search',$scope.tipo)
@@ -137,6 +139,18 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
         $scope.datax = $filter('filter')($scope.datax1,$scope.tipo)
 
       }
+
+
+    function ObjectLength( object ) {
+    var length = 0;
+    for( var key in object ) {
+        if( object.hasOwnProperty(key) ) {
+            ++length;
+        }
+    }
+    return length;
+    };
+
       
 }
 

@@ -4,8 +4,9 @@ angular
     templateUrl: 'src/component/searchvertical/searchvertical.html',
     controller: Searchvertical,
     bindings: {
-      hotels: '='
+      checkin: '='
     }
+
   });
 
 
@@ -15,11 +16,18 @@ angular
 function Searchvertical($scope,$translate) {
 
 
-  console.log('Searchvertical',this.hotels)
+  $scope.checkin = this.checkin
 
-  $scope.vertical = this.hotels
 
-  $scope.vertical.push(23)
+  $scope.busqueda = function(data) {
+
+    console.log('Filtro Secundario',data)
+
+    this.checkin = data
+
+  };
+
+  
 
 
 

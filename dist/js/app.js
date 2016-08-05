@@ -150,33 +150,44 @@ angular
     }
   });
 
-function Filtro(hotelsService,interesService,$scope,$filter,$http) {
+function Filtro(hotelsService,interesService,$scope,$filter,$http,$q) {
+
+
+    var defered = $q.defer();
+
+    var promise = defered.promise;
+
+    $scope.filtropri = true
+
+    $scope.filtrosec = false
+
+    $scope.resultaconteo = false
+
+    $scope.listgroup = true
+
+    $scope.web = false
 
 
 
-    console.log('Filtro..',this.interes)
+    $http.get(host+'hotel/').success(function(data) {
 
+    console.log('Hotel Primera Busqueda',data)
 
-    $scope.dag = [2,3,4]
+    $scope.hotels = data
 
-
-
-    hotelsService.getAll().then(function(data) {
-
-    console.log('hoteles',data)
-
-    $scope.hotels = data.data
 
     })
 
+    this.hoteles = promise
+
+    
+ 
 
     $scope.fil = false
 
-    console.log('$scope.datainteres',this.interes)
 
 	  interesService.getAll().then(function(data) {
 
-    console.log('hshhs',data)
 
     $scope.datax1 = data
 
@@ -189,8 +200,6 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
 
      $scope.addchip = function (data,index) {
 
-      console.log('index',index)
-
       $scope.chips.push(data)
 
       $scope.datax.splice(index,1)
@@ -200,7 +209,6 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
 
     $scope.add = function(data,index){
 
-      console.log('ajajaj',data)
 
       $scope.chips.splice(index,1)
 
@@ -231,27 +239,18 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
     $scope.search_hotels = function() {
 
 
-      console.log('Searching.......',$scope.chips)
+      $scope.resultaconteo = true
 
-      $http({
+      $scope.listgroup = false
 
-      url: host+"hotel/search/",
-      data: $scope.chips,
-      method: 'POST'
+      $scope.web = true
 
-      }).
-      success(function(data) {
-
-
-        console.log('Resultados....',data)
-
-        $scope.hotels = data
-
-
-      })
+      $scope.filtropri = false
 
   
     };
+
+   
 
 
     $scope.filmouse = function (data) {
@@ -261,6 +260,9 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
     }
 
     $scope.search = function () {
+
+
+       $scope.listgroup = true
 
       
         console.log('search',$scope.tipo)
@@ -278,6 +280,18 @@ function Filtro(hotelsService,interesService,$scope,$filter,$http) {
         $scope.datax = $filter('filter')($scope.datax1,$scope.tipo)
 
       }
+
+
+    function ObjectLength( object ) {
+    var length = 0;
+    for( var key in object ) {
+        if( object.hasOwnProperty(key) ) {
+            ++length;
+        }
+    }
+    return length;
+    };
+
       
 }
 
@@ -417,25 +431,27 @@ angular
   .module('app')
   .component('listhotels', {
     templateUrl: 'src/component/listhotels/listhotels.html',
-    controller: Hotel
+    controller: Hotel,
+    bindings: {
+      data: '='
+    }
   });
 
 /** @ngInject */
 function Hotel(hotelsService,$scope) {
 
-
-  console.log('data.......')
-
-  hotelsService.getAll().then(function(data) {
-
-  	console.log('hoteles',data)
-
-    $scope.hotels = data.data
+  console.log('listhotels......',this.data)
 
 
+  this.data.then(function(data) {
 
-            
-    })
+    console.log('Then...',data)
+
+    $scope.hotels = data
+     
+  })
+
+
 
 
 }
@@ -643,8 +659,9 @@ angular
     templateUrl: 'src/component/searchvertical/searchvertical.html',
     controller: Searchvertical,
     bindings: {
-      hotels: '='
+      checkin: '='
     }
+
   });
 
 
@@ -654,11 +671,18 @@ angular
 function Searchvertical($scope,$translate) {
 
 
-  console.log('Searchvertical',this.hotels)
+  $scope.checkin = this.checkin
 
-  $scope.vertical = this.hotels
 
-  $scope.vertical.push(23)
+  $scope.busqueda = function(data) {
+
+    console.log('Filtro Secundario',data)
+
+    this.checkin = data
+
+  };
+
+  
 
 
 
@@ -776,15 +800,225 @@ angular
   .service('interesService', interesService)
   .component('web', {
     templateUrl: 'src/component/web/web.html',
-    controller: Web
+    controller: Web,
+     bindings: {
+      hotels: '=',
+      chips1: '='
+    }
   });
 
-function Web($scope,$stateParams){
 
-	console.log('Web',$stateParams)
+/** @ngInject */
+function Web($scope,$translate,$http) {
+
+  $scope.resultaconteo = true
+
+  $scope.listgroup = false
+
+  $scope.chips1 = this.chips1
+
+
+
+  $scope.$watch('chips1', function() {
+
+        $http({
+
+    url: host+"hotel/search/",
+    data: $scope.chips1,
+    method: 'POST'
+
+    }).
+    success(function(data) {
+
+
+      $scope.hotels = data
+
+      $scope.conteo = ObjectLength($scope.hotels)
+
+    })
+
+    
+        
+    }, true);
+
+
+
+
+    $http({
+
+    url: host+"hotel/search/",
+    data: $scope.chips1,
+    method: 'POST'
+
+    }).
+    success(function(data) {
+
+
+      $scope.hotels = data
+
+      $scope.conteo = ObjectLength($scope.hotels)
+
+    })
+
+
+  
+
+  $scope.busqueda = function(data) {
+
+    console.log('Filtro Secundario',data)
+
+
+    $scope.resultaconteo = true
+
+    var todo={
+
+            filtro: data,
+            chips: $scope.chips1
+        }
+
+
+    $http({
+
+    url: host+"hotel/avaliable/",
+    data: todo,
+    method: 'POST'
+
+    }).
+    success(function(data) {
+
+      console.log('Hoteles :)',data)
+
+        $scope.hotels = data
+
+        $scope.conteo = ObjectLength($scope.hotels)
+
+
+    })
+
+
+
+  };
+
+    function ObjectLength( object ) {
+    var length = 0;
+    for( var key in object ) {
+        if( object.hasOwnProperty(key) ) {
+            ++length;
+        }
+    }
+    return length;
+    };
 
 
 
 
   
+
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  $scope.inlineOptions = {
+    customClass: getDayClass,
+    minDate: new Date(),
+    showWeeks: true
+  };
+
+  $scope.dateOptions = {
+    dateDisabled: disabled,
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
+
+  // Disable weekend selection
+  function disabled(data) {
+    var date = data.date,
+      mode = data.mode;
+    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  }
+
+  $scope.toggleMin = function() {
+    $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+    $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+  };
+
+  $scope.toggleMin();
+
+  $scope.open1 = function() {
+    $scope.popup1.opened = true;
+  };
+
+  $scope.open2 = function() {
+    $scope.popup2.opened = true;
+  };
+
+  $scope.setDate = function(year, month, day) {
+    $scope.dt = new Date(year, month, day);
+  };
+
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+  $scope.altInputFormats = ['M!/d!/yyyy'];
+
+  $scope.popup1 = {
+    opened: false
+  };
+
+  $scope.popup2 = {
+    opened: false
+  };
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var afterTomorrow = new Date();
+  afterTomorrow.setDate(tomorrow.getDate() + 1);
+  $scope.events = [
+    {
+      date: tomorrow,
+      status: 'full'
+    },
+    {
+      date: afterTomorrow,
+      status: 'partially'
+    }
+  ];
+
+  function getDayClass(data) {
+    var date = data.date,
+      mode = data.mode;
+    if (mode === 'day') {
+      var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+      for (var i = 0; i < $scope.events.length; i++) {
+        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+        if (dayToCheck === currentDay) {
+          return $scope.events[i].status;
+        }
+      }
+    }
+
+    return '';
+  }
+
+  $scope.searchdetalle = function(data) {
+    
+    console.log(data)
+
+
+  };
+
+
 }
+
+
+
+
+

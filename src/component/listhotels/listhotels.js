@@ -2,25 +2,27 @@ angular
   .module('app')
   .component('listhotels', {
     templateUrl: 'src/component/listhotels/listhotels.html',
-    controller: Hotel
+    controller: Hotel,
+    bindings: {
+      data: '='
+    }
   });
 
 /** @ngInject */
 function Hotel(hotelsService,$scope) {
 
-
-  console.log('data.......')
-
-  hotelsService.getAll().then(function(data) {
-
-  	console.log('hoteles',data)
-
-    $scope.hotels = data.data
+  console.log('listhotels......',this.data)
 
 
+  this.data.then(function(data) {
 
-            
-    })
+    console.log('Then...',data)
+
+    $scope.hotels = data
+     
+  })
+
+
 
 
 }

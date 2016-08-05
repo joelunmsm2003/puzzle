@@ -1,11 +1,15 @@
 
 
 
-
-
           Date & Occupancy
 
-          Resltados...{{vertical}}
+     
+          <div ng-show = "resultaconteo" class="alert alert-info" role="alert">Resultados de busqueda {{conteo}}</div>
+
+
+          <div class=row>
+
+          <div class="col-md-4">
 
           <div class='row'>
 
@@ -15,7 +19,7 @@
 
                   <label for="repeatSelect"> {{ 'CHECKIN' | translate}} </label>
                   <p class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.checkin" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                    <input type="text" ng-change="busqueda(model)" class="form-control" style="font-size:15px;" uib-datepicker-popup="{{format}}" ng-model="model.checkin" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -26,7 +30,7 @@
 
                   <label for="repeatSelect"> {{ 'CHECKOUT' | translate}} </label>
                   <p class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup ng-model="model.checkout" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                    <input type="text" ng-change="busqueda(model)" class="form-control" style="font-size:15px;" uib-datepicker-popup ng-model="model.checkout" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -41,7 +45,7 @@
                 <label for="repeatSelect"> {{ 'ADULTS' | translate}} </label>
               
 
-                <input type="number" ng-model="model.adults" class="form-control" >
+                <input type="number" ng-change="busqueda(model)" ng-model="model.adults" class="form-control" >
 
                 </div>
 
@@ -49,7 +53,7 @@
          
 
                <label for="repeatSelect"> {{ 'CHILDRENS' | translate}} </label>
-                <input type="number" ng-model="model.ninos" class="form-control" >
+                <input type="number" ng-change="busqueda(model)" ng-model="model.ninos" class="form-control" >
 
                 </div>
 
@@ -57,7 +61,7 @@
 
 
                 <label for="repeatSelect"> {{ 'ROOMS' | translate}} </label>
-                <input type="number" ng-model="model.rooms" class="form-control" >
+                <input type="number" ng-change="busqueda(model)" ng-model="model.rooms" class="form-control" >
 
 
                 </div>
@@ -75,14 +79,14 @@
 
     <div class="checkbox">
       <label>
-        <input type="checkbox" value="">
+        <input type="checkbox" ng-change="busqueda(model)"  ng-model="model.n" value="">
         Natacion
       </label>
     </div>
 
      <div class="checkbox">
       <label>
-        <input type="checkbox" value="">
+        <input type="checkbox"  ng-change="busqueda(model)" ng-model="model.t"  value="">
         Trekking
       </label>
     </div>
@@ -101,86 +105,57 @@
 
     <div class="checkbox">
       <label>
-        <input type="checkbox" value="">
+        <input type="checkbox" ng-change="busqueda(model)" ng-model="model.onestar" value="">
         One Star
       </label>
     </div>
 
       <div class="checkbox">
       <label>
-        <input type="checkbox" value="">
+        <input type="checkbox" ng-change="busqueda(model)" ng-model="model.twostar" value="">
         Two Star
       </label>
      </div>
 
     <div class="checkbox">
       <label>
-        <input type="checkbox" value="">
+        <input type="checkbox" ng-change="busqueda(model)" ng-model="model.threestar" value="">
         Three Star
       </label>
      </div>
 
      <div class="checkbox">
       <label>
-        <input type="checkbox" value="">
+        <input type="checkbox" ng-change="busqueda(model)" ng-model="model.fourstar" value="">
         Four Star
       </label>
      </div>
 
      <div class="checkbox">
       <label>
-        <input type="checkbox" value="">
+        <input type="checkbox" ng-change="busqueda(model)" ng-model="model.fivestar" value="">
         Five Star
       </label>
      </div>
 
     </div>
 
-
-      <div class="row">
-
-    Price
-
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" value="">
-        Low to High
-      </label>
     </div>
 
-     <div class="checkbox">
-      <label>
-        <input type="checkbox" value="">
-        High to Low
-      </label>
-    </div>
+    <div class="col-sm-8">
+
+    Hoteles
+      <listhoteldetail ng-repeat="item in hotels" hotels="item" ></listhoteldetail>
 
 
 
     </div>
 
-
-       <div class="row">
-
-    Types
-
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" value="">
-        Basic
-      </label>
-    </div>
-
-     <div class="checkbox">
-      <label>
-        <input type="checkbox" value="">
-        Premium
-      </label>
     </div>
 
 
 
-    </div>
+
 
 
 
