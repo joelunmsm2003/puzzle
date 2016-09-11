@@ -1,12 +1,10 @@
 angular
   .module('app', ['ui.router','ngStorage','pascalprecht.translate','ui.bootstrap','ngAnimate','ngTouch'])
-  .service('interesService', interesService)
-  .service('hotelsService', hotelsService)
   .config(routesConfig)
+ 
 
 
-
-host = 'http://localhost:8000/' 
+host = 'http://localhost:8600/' 
 
 var lang = 'es'
 
@@ -47,9 +45,9 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
       url: '/',
       template: '<home></home>'
     })
-    .state('web', {
-      url: '/web/:hoteles',
-      template: '<web></web>'
+    .state('puzzle', {
+      url: '/puzzle',
+      template: '<slidingPuzzle></slidingPuzzle>'
     });
     
 

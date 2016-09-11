@@ -1,108 +1,12 @@
-angular
-  .module('app', ['ui.router','ngStorage','pascalprecht.translate','ui.bootstrap','ngAnimate','ngTouch'])
-  .config(routesConfig)
- 
+(function(angular) {
+    'use strict';
 
+    var module = angular.module('slidingPuzzle', []);
 
-host = 'http://localhost:8600/' 
-
-var lang = 'es'
-
-
-
-/** @ngInject */
-function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$httpProvider,$translateProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
-  $urlRouterProvider.otherwise('/');
-
- 
-
-  // Languages
-
-  $.get("es.json", function(data){
-
-  console.log(data)
-
-  $translateProvider.translations('es',data);
-         
-  });
-
-  $.get("en.json", function(data){
-
-  console.log(data)
-
-  $translateProvider.translations('en',data);
-         
-  });
-
-
- 
-  $translateProvider.preferredLanguage(lang);
-
-
-  $stateProvider
-    .state('app', {
-      url: '/',
-      template: '<home></home>'
-    })
-    .state('puzzle', {
-      url: '/puzzle',
-      template: '<slidingPuzzle></slidingPuzzle>'
-    });
-    
-
-
-
-	 $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
-	return {
-	    'request': function (config) {
-	        config.headers = config.headers || {};
-	        if ($localStorage.token) {
-	            config.headers.Authorization = 'Bearer ' + $localStorage.token;
-	        }
-	        return config;
-	    },
-	    'responseError': function(response) {
-	        if(response.status === 401 || response.status === 403) {
-	            $location.path('/signin');
-	        }
-	        return $q.reject(response);
-	    }
-	};
-	}]);
-
-
-
-}
-
-
-
-
-
-
-angular
-  .module('app')
-
-  .component('slidingPuzzle', {
-    templateUrl: 'src/component/slidingPuzzle/slidingPuzzle.html',
-    controller: Puzzle,
-    bindings: {
-      interes: '='
-    }
-  });
-
-function Puzzle($scope,$filter,$http,$q) {
-
-
-
- 
-
-}
-
-
-angular
-  .module('app')
-  .factory('slidingPuzzle', function() {
+    /**
+     * Service
+     */
+    module.factory('slidingPuzzle', function() {
         function shuffle(a) {
             var q;
             for (var j, x, i = a.length; i; j = parseInt(Math.random() * i, 10), x = a[--i], a[i] = a[j], a[j] = x) { q = 0; }
@@ -221,54 +125,79 @@ angular
         return function(rows, cols) {
             return new SlidingPuzzle(rows, cols);
         };
-    })
-
-  .component('home', {
-    templateUrl: 'src/component/home/home.html',
-    controller: Home,
-    bindings: {
-      interes: '='
-    }
-  });
-
-function Home($scope,$filter,$http,$q,slidingPuzzle) {
-
-    $scope.rows = 4
-    $scope.cols = 3
-
-
-
-    $scope.src = '/dist/img/ola.jpg'
-
-    var img = new Image();
-   
-    img.src = '/dist/img/ola.jpg'
-
-    $scope.puzzle = slidingPuzzle($scope.rows, $scope.cols);
-
-
-
-    var width = img.width / $scope.cols,
-    height = img.height / $scope.rows;
-
-    $scope.puzzle.traverse(function(tile, row, col) {
-        tile.style = {
-            width: width + 'px',
-            height: height + 'px',
-            background: (tile.empty ? 'none' : "url('" + $scope.src + "') no-repeat -" + (col * width) + 'px -' + (row * height) + 'px')
-        };
     });
 
-    $scope.puzzle.shuffle();
+    /**
+     * Directive
+     */
+    module.directive('slidingPuzzle', function(slidingPuzzle) {
+        return {
+            restrict: 'EA',
+            replace: true,
+            template: '<table class="sliding-puzzle" ng-class="{\'puzzle-solved\': puzzle.isSolved()}">' +
+                '<tr ng-repeat="($row, row) in puzzle.grid">' +
+                '<td ng-repeat="($col, tile) in row" ng-click="puzzle.move($row, $col)" ng-style="tile.style" ng-class="{\'puzzle-empty\': tile.empty}" title="{{tile.id}}"></td>' +
+                '</tr>' +
+                '</table>',
+            scope: {
+                size: '@',
+                src: '@',
+                api: '='
+            },
+            link: function(scope, element, attrs) {
+                var rows, cols,
+                    loading = true,
+                    image = new Image();
 
+                function create() {
+                    scope.puzzle = slidingPuzzle(rows, cols);
 
+                    if (attrs.api) {
+                        scope.api = scope.puzzle;
+                    }
 
+                    tile();
+                }
 
-    console.log('Puzzle..',$scope.puzzle)
+                function tile() {
+                    if (loading) {
+                        return;
+                    }
 
+                    var width = image.width / cols,
+                        height = image.height / rows;
 
+                    scope.puzzle.traverse(function(tile, row, col) {
+                        tile.style = {
+                            width: width + 'px',
+                            height: height + 'px',
+                            background: (tile.empty ? 'none' : "url('" + scope.src + "') no-repeat -" + (col * width) + 'px -' + (row * height) + 'px')
+                        };
+                    });
 
+                    scope.puzzle.shuffle();
+                }
 
-}
+                attrs.$observe('size', function(size) {
+                    size = size.split('x');
+                    if (size[0] >= 2 && size[1] >= 2) {
+                        rows = size[0];
+                        cols = size[1];
+                        create();
+                    }
+                });
 
-
+                attrs.$observe('src', function(src) {
+                    loading = true;
+                    image.src = src;
+                    image.onload = function() {
+                        loading = false;
+                        scope.$apply(function() {
+                            tile();
+                        });
+                    };
+                });
+            }
+        };
+    });
+})(window.angular);
