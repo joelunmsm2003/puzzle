@@ -1,9 +1,16 @@
 /* General */
 body {
-    font-family: 'Baloo Tamma', cursive;
-background-color: #EDEA0F;
-margin-top: 10px;
-margin-left: 20px;
+
+font-family: 'Baloo Tamma', cursive;
+font-size:15px;
+color:#337AB7;
+
+
+}
+
+.panel-body {
+    padding: 15px;
+    height: 250px;
 }
 /*
 fieldset {

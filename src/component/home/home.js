@@ -129,10 +129,51 @@ angular
     }
   });
 
-function Home($scope,$filter,$http,$q,slidingPuzzle) {
+function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService) {
+
+    console.log('hahaha',$stateParams)
+
+    var entry = puzzleService.get({ id:$stateParams.id }, function(data) {
+
+        $scope.src = data.data.src
+
+        $scope.rows = data.data.rows
+
+        $scope.cols = data.data.cols
+
+        var img = new Image();
+       
+        img.src = data.data.src
+
+        $scope.puzzle = slidingPuzzle($scope.rows, $scope.cols);
+
+        var width = img.width / $scope.cols,
+        height = img.height / $scope.rows;
+
+        $scope.puzzle.traverse(function(tile, row, col) {
+            tile.style = {
+                width: width + 'px',
+                height: height + 'px',
+                background: (tile.empty ? 'none' : "url('" + $scope.src + "') no-repeat -" + (col * width) + 'px -' + (row * height) + 'px')
+            };
+        });
+
+        $scope.puzzle.shuffle();
+
+    
+    });
+    /*
 
     $scope.rows = 4
     $scope.cols = 3
+
+
+
+
+    var todo = {
+                "body": "some comment11111",
+                "postId": 1
+                }
 
 
 
@@ -162,7 +203,7 @@ function Home($scope,$filter,$http,$q,slidingPuzzle) {
 
 
 
-    console.log('Puzzle..',$scope.puzzle)
+    console.log('Puzzle..',$scope.puzzle)*/
 
 
 

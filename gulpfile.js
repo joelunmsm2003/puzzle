@@ -40,8 +40,8 @@ gulp.task('app-js', function() {
 		
 	// Grab your custom scripts
 	
-	'./src/component/service/**/*.js',
 	'./rutas.js',
+	'./src/service/**/*.js',
 	'./src/component/**/*.js',
 				
 	])
@@ -74,6 +74,7 @@ gulp.task('vendor-js', function() {
     './bower_components/angular-touch/angular-touch.js',
     './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
     './bower_components/puzzle/puzzle.js',
+    './bower_components/angular-resource/angular-resource.js',
 
 
 				
@@ -123,9 +124,14 @@ gulp.task('watch', function() {
 	gulp.watch('./src/**/*.scss', ['styles']);
 
 	// Watch site-js files
-	gulp.watch('./src/**/*.js', ['app-js']);
 
 	gulp.watch('./rutas.js', ['app-js']);
+
+
+
+	gulp.watch('./src/**/*.js', ['app-js']);
+
+	
 
 	// Watch vendor-js files
 	gulp.watch('./bower_components/**/*.js', ['vendor-js']);

@@ -1,10 +1,10 @@
 angular
-  .module('app', ['ui.router','ngStorage','pascalprecht.translate','ui.bootstrap','ngAnimate','ngTouch'])
+  .module('app', ['ui.router','ngStorage','pascalprecht.translate','ui.bootstrap','ngAnimate','ngTouch','ngResource'])
   .config(routesConfig)
  
 
 
-host = 'http://localhost:8600/' 
+host = 'http://localhost:3000/' 
 
 var lang = 'es'
 
@@ -12,7 +12,9 @@ var lang = 'es'
 
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$httpProvider,$translateProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
+
+
+  
   $urlRouterProvider.otherwise('/');
 
  
@@ -42,12 +44,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
 
   $stateProvider
     .state('app', {
-      url: '/',
+      url: '/puzzle/:id',
       template: '<home></home>'
     })
-    .state('puzzle', {
-      url: '/puzzle',
-      template: '<slidingPuzzle></slidingPuzzle>'
+    .state('admin', {
+      url: '/admin',
+      template: '<admin></admin>'
     });
     
 
@@ -82,20 +84,103 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
 
 angular
   .module('app')
+  .factory('puzzleService', function ($resource) {
 
-  .component('slidingPuzzle', {
-    templateUrl: 'src/component/slidingPuzzle/slidingPuzzle.html',
-    controller: Puzzle,
-    bindings: {
-      interes: '='
-    }
+	 
+	   
+
+		return $resource(host+'puzzle/:id', {
+            id: '@_id'
+        }, { //parameters default
+            update: {
+                method: 'PUT'
+            }
+        });
+
+	});
+
+
+
+angular
+  .module('app')
+  .component('admin', {
+    templateUrl: 'src/component/admin/admin.html',
+    controller: Admin
+
   });
 
-function Puzzle($scope,$filter,$http,$q) {
+function Admin($scope,$filter,$http,$q,puzzleService) {
 
 
 
- 
+$scope.add =function(data){
+
+
+$scope.entry = new puzzleService(); 
+
+$scope.entry.data = data
+
+$scope.entry.$save(function() {
+
+   var entries = puzzleService.query(function() {
+   
+    $scope.puzzles = entries
+
+  }); 
+
+   
+});
+
+}
+
+ var entry = puzzleService.get({ id:'1' }, function(data) {
+    console.log('puzzles',data);
+  }); 
+
+
+ var entries = puzzleService.query(function() {
+   
+    $scope.puzzles = entries
+
+  }); 
+
+
+
+
+
+
+
+
+    puzzleService.get({ id:'1' },function(data) {
+
+    data.src = '8888'
+   
+    puzzleService.update({ id:'1' }, data);
+  
+
+  });
+
+
+
+// Now call update passing in the ID first then the object you are updating
+
+
+
+}
+
+
+angular
+  .module('app')
+  
+  .component('header', {
+    templateUrl: 'src/component/header/header.html',
+    controller: Header
+
+  });
+
+function Header($scope,$filter,$http,$q) {
+
+
 
 }
 
@@ -231,10 +316,51 @@ angular
     }
   });
 
-function Home($scope,$filter,$http,$q,slidingPuzzle) {
+function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService) {
+
+    console.log('hahaha',$stateParams)
+
+    var entry = puzzleService.get({ id:$stateParams.id }, function(data) {
+
+        $scope.src = data.data.src
+
+        $scope.rows = data.data.rows
+
+        $scope.cols = data.data.cols
+
+        var img = new Image();
+       
+        img.src = data.data.src
+
+        $scope.puzzle = slidingPuzzle($scope.rows, $scope.cols);
+
+        var width = img.width / $scope.cols,
+        height = img.height / $scope.rows;
+
+        $scope.puzzle.traverse(function(tile, row, col) {
+            tile.style = {
+                width: width + 'px',
+                height: height + 'px',
+                background: (tile.empty ? 'none' : "url('" + $scope.src + "') no-repeat -" + (col * width) + 'px -' + (row * height) + 'px')
+            };
+        });
+
+        $scope.puzzle.shuffle();
+
+    
+    });
+    /*
 
     $scope.rows = 4
     $scope.cols = 3
+
+
+
+
+    var todo = {
+                "body": "some comment11111",
+                "postId": 1
+                }
 
 
 
@@ -264,7 +390,7 @@ function Home($scope,$filter,$http,$q,slidingPuzzle) {
 
 
 
-    console.log('Puzzle..',$scope.puzzle)
+    console.log('Puzzle..',$scope.puzzle)*/
 
 
 

@@ -1,32 +1,47 @@
 
+<header></header>
 
-<i class="fa fa-question-circle-o" aria-hidden="true"></i>
+<div class ="container">
+
 
 	<div class="src">
-					<input type="text" ng-model="puzzle.src" ng-change='changesize(puzzle)'/>
+				
+				<!--<input type="text" ng-model="puzzle.src" ng-change='changesize(puzzle)'/>-->
 				</div>
 				<div class="status">
 					moves: <strong>{{puzzle.moves}}</strong><br/>
 
 
-					solved: <strong>{{puzzle.isSolved()}}</strong>
+					<!--solved: <strong>{{puzzle.isSolved()}}</strong>-->
 				</div>
-				<div class="size">
+				
 					<!--rows: <input type="text" ng-model="puzzle.rows1" ng-change='changesize(puzzle)' size="2"/>
 					cols: <input type="text" ng-model="puzzle.cols1" ng-change='changesize(puzzle)' size="2"/><br/>-->
-					<button ng-click="puzzle.shuffle()">shuffle</button>
-					<button ng-click="puzzle.solve()">solve</button>
-				</div>
-
-		
 
 
+					<div class="col-md-2 col-xs-12">
+					<button class="form-control" ng-click="puzzle.shuffle()">shuffle</button>
+					</div>
+					<div class="col-md-2 col-xs-12">
+					<!--<button class="form-control" ng-click="puzzle.solve()">solve</button>-->
+					</div>
 
 
-<table class="sliding-puzzle" ng-class="{'puzzle-solved': puzzle.isSolved()}"> 
+				<br></br>
+
+
+
+				<div  class="col-md-12 offset-md-6 col-xs-12 ">
+				<table class="sliding-puzzle" ng-class="{'puzzle-solved': puzzle.isSolved()}"> 
                 
 				<tr ng-repeat="($row, row) in puzzle.grid">
                 <td ng-repeat="($col, tile) in row" ng-click="puzzle.move($row, $col)" ng-style="tile.style" ng-class="{'puzzle-empty': tile.empty}" title="{{tile.id}}"></td>
-                </tr>' 
+                </tr> 
 
                 </table>
+                </div>
+
+
+
+
+</div>

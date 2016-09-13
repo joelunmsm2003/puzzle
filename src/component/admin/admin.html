@@ -1,0 +1,64 @@
+<header></header>
+
+<div class='container'>
+
+<div class='row'>
+
+			<div class='col-md-6 col-xs-12'>
+			URL Image:
+
+
+			<input ng-model='puzzle.src' type="text" name="" id="input" class="form-control">
+
+
+			</div>
+			<div class='col-md-1 col-xs-12'>
+
+			Filas:
+
+			<input ng-model='puzzle.rows' type="number" name="" id="input" class="form-control">
+			</div>
+			<div class='col-md-1 col-xs-12'>
+
+			Columnas:
+
+			<input ng-model='puzzle.cols' type="number" name="" id="input" class="form-control">
+			</div>
+
+
+			<div class='col-md-12 col-xs-12'>
+
+			<br>
+			<a ng-click='add(puzzle)' class='btn btn-success'>Lanzar rompecabeza</a>
+			</div>
+</div>
+
+<br>
+
+
+
+
+<div class='row'>
+<div ng-repeat="model in puzzles | orderBy : '-id' " class='col-md-3 col-xs-12'>
+    
+		<div class="panel panel-default">
+		<div class="panel-heading">Filas : {{model.data.rows}} Columnas : {{model.data.cols}}</div>
+		<div class="panel-body">
+
+		
+		<img class="img-responsive" src='{{model.data.src}}'>
+		<br>
+		<a class="btn btn-primary btn-sm" href='#/puzzle/{{model.id}}'>Play</a>
+		</div>
+		</div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+

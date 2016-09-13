@@ -1,10 +1,10 @@
 angular
-  .module('app', ['ui.router','ngStorage','pascalprecht.translate','ui.bootstrap','ngAnimate','ngTouch'])
+  .module('app', ['ui.router','ngStorage','pascalprecht.translate','ui.bootstrap','ngAnimate','ngTouch','ngResource'])
   .config(routesConfig)
  
 
 
-host = 'http://localhost:8600/' 
+host = 'http://localhost:3000/' 
 
 var lang = 'es'
 
@@ -12,7 +12,9 @@ var lang = 'es'
 
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$httpProvider,$translateProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
+
+
+  
   $urlRouterProvider.otherwise('/');
 
  
@@ -42,12 +44,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
 
   $stateProvider
     .state('app', {
-      url: '/',
+      url: '/puzzle/:id',
       template: '<home></home>'
     })
-    .state('puzzle', {
-      url: '/puzzle',
-      template: '<slidingPuzzle></slidingPuzzle>'
+    .state('admin', {
+      url: '/admin',
+      template: '<admin></admin>'
     });
     
 
