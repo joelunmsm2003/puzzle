@@ -14,9 +14,6 @@ $scope.delete =function(data){
   console.log('shshsh',data)
 
 
-
-
-
    puzzleService.delete({ id:data.id} , function(data) {
 
       puzzleService.query(function(data) {
