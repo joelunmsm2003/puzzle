@@ -9,6 +9,9 @@ angular
 function Admin($scope,$filter,$http,$q,puzzleService) {
 
 
+  console.log('porque.....')
+
+
 $scope.delete =function(data){
 
   console.log('shshsh',data)
@@ -49,15 +52,15 @@ $scope.entry.$save(function() {
 
 }
 
- var entry = puzzleService.get({ id:'1' }, function(data) {
-    console.log('puzzles',data);
-  }); 
+
 
 
   var entries = puzzleService.query(function() {
    
     $scope.puzzles = entries
 
+    console.log($scope.puzzles)
+
   }); 
 
 
@@ -70,15 +73,6 @@ $scope.entry.$save(function() {
 
 
 
-
-    puzzleService.get({ id:'1' },function(data) {
-
-    data.src = '8888'
-   
-    puzzleService.update({ id:'1' }, data);
-  
-
-  });
 
 
 

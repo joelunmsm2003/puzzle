@@ -5,7 +5,7 @@ angular
 	 
 	   
 
-		return $resource(host+'puzzle/:id', {
+		return $resource(host+'puzzle/:id/', {
             id: '@_id'
         }, { //parameters default
             update: {

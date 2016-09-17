@@ -1,5 +1,11 @@
+killall -9 node
+killall -9 python
+
 gulp watch&
 node server.js&
-json-server --watch db.json&
+
 subl
+
+cd mysite
+python manage.py runserver&
 

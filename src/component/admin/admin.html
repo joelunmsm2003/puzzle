@@ -39,14 +39,14 @@
 
 
 <div class='row'>
-<div ng-repeat="model in puzzles | orderBy : '-id' " class='col-md-3 col-xs-12'>
+<div ng-repeat="model in puzzles " class='col-md-3 col-xs-12'>
     
 		<div class="panel panel-default">
-		<div class="panel-heading">Filas : {{model.data.rows}} Columnas : {{model.data.cols}}</div>
+		<div class="panel-heading">Filas : {{model.rows}} Columnas : {{model.cols}}</div>
 		<div class="panel-body">
 
 		
-		<img class="img-responsive" src='{{model.data.src}}'>
+		<img class="img-responsive" src='{{model.src}}'>
 		<br>
 		<a class="btn btn-primary btn-sm" href='#/puzzle/{{model.id}}'>Play</a>
 		<a class="btn btn-primary btn-sm" ng-click='delete(model)'>Delete</a>

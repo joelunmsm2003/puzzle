@@ -133,17 +133,19 @@ function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService) 
 
     console.log('hahaha',$stateParams)
 
-    var entry = puzzleService.get({ id:$stateParams.id }, function(data) {
+    var entry = puzzleService.query({ id:$stateParams.id }, function(data) {
 
-        $scope.src = data.data.src
+        data = data[0]
 
-        $scope.rows = data.data.rows
+        $scope.src = data.src
 
-        $scope.cols = data.data.cols
+        $scope.rows = data.rows
+
+        $scope.cols = data.cols
 
         var img = new Image();
        
-        img.src = data.data.src
+        img.src = data.src
 
         $scope.puzzle = slidingPuzzle($scope.rows, $scope.cols);
 

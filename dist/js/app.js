@@ -89,7 +89,7 @@ angular
 	 
 	   
 
-		return $resource(host+'puzzle/:id', {
+		return $resource(host+'puzzle/:id/', {
             id: '@_id'
         }, { //parameters default
             update: {
@@ -103,22 +103,6 @@ angular
 
 angular
   .module('app')
-  
-  .component('header', {
-    templateUrl: 'src/component/header/header.html',
-    controller: Header
-
-  });
-
-function Header($scope,$filter,$http,$q) {
-
-
-
-}
-
-
-angular
-  .module('app')
   .component('admin', {
     templateUrl: 'src/component/admin/admin.html',
     controller: Admin
@@ -126,6 +110,9 @@ angular
   });
 
 function Admin($scope,$filter,$http,$q,puzzleService) {
+
+
+  console.log('porque.....')
 
 
 $scope.delete =function(data){
@@ -168,15 +155,15 @@ $scope.entry.$save(function() {
 
 }
 
- var entry = puzzleService.get({ id:'1' }, function(data) {
-    console.log('puzzles',data);
-  }); 
+
 
 
   var entries = puzzleService.query(function() {
    
     $scope.puzzles = entries
 
+    console.log($scope.puzzles)
+
   }); 
 
 
@@ -190,18 +177,25 @@ $scope.entry.$save(function() {
 
 
 
-    puzzleService.get({ id:'1' },function(data) {
-
-    data.src = '8888'
-   
-    puzzleService.update({ id:'1' }, data);
-  
-
-  });
-
 
 
 // Now call update passing in the ID first then the object you are updating
+
+
+
+}
+
+
+angular
+  .module('app')
+  
+  .component('header', {
+    templateUrl: 'src/component/header/header.html',
+    controller: Header
+
+  });
+
+function Header($scope,$filter,$http,$q) {
 
 
 
@@ -343,17 +337,19 @@ function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService) 
 
     console.log('hahaha',$stateParams)
 
-    var entry = puzzleService.get({ id:$stateParams.id }, function(data) {
+    var entry = puzzleService.query({ id:$stateParams.id }, function(data) {
 
-        $scope.src = data.data.src
+        data = data[0]
 
-        $scope.rows = data.data.rows
+        $scope.src = data.src
 
-        $scope.cols = data.data.cols
+        $scope.rows = data.rows
+
+        $scope.cols = data.cols
 
         var img = new Image();
        
-        img.src = data.data.src
+        img.src = data.src
 
         $scope.puzzle = slidingPuzzle($scope.rows, $scope.cols);
 
