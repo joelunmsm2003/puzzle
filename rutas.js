@@ -4,7 +4,7 @@ angular
  
 
 
-host = 'http://localhost:1500' 
+host = 'http://localhost:8000' 
 
 var lang = 'es'
 
