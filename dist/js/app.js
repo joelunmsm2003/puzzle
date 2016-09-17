@@ -4,7 +4,7 @@ angular
  
 
 
-host = 'http://andyjo.tk:3000/' 
+host = 'http://localhost:8000/' 
 
 var lang = 'es'
 
@@ -103,6 +103,22 @@ angular
 
 angular
   .module('app')
+  
+  .component('header', {
+    templateUrl: 'src/component/header/header.html',
+    controller: Header
+
+  });
+
+function Header($scope,$filter,$http,$q) {
+
+
+
+}
+
+
+angular
+  .module('app')
   .component('admin', {
     templateUrl: 'src/component/admin/admin.html',
     controller: Admin
@@ -186,22 +202,6 @@ $scope.entry.$save(function() {
 
 
 // Now call update passing in the ID first then the object you are updating
-
-
-
-}
-
-
-angular
-  .module('app')
-  
-  .component('header', {
-    templateUrl: 'src/component/header/header.html',
-    controller: Header
-
-  });
-
-function Header($scope,$filter,$http,$q) {
 
 
 
