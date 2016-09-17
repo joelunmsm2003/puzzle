@@ -3,8 +3,8 @@ angular
   .config(routesConfig)
  
 
-
 host = 'http://localhost:8000' 
+
 
 var lang = 'es'
 
