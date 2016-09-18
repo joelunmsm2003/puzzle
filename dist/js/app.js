@@ -4,7 +4,7 @@ angular
  
 
 
-host = 'http://localhost:8000/' 
+host = 'http://andyjo.tk:3000/' 
 
 var lang = 'es'
 
@@ -117,7 +117,7 @@ function Admin($scope,$filter,$http,$q,puzzleService) {
 
 $scope.delete =function(data){
 
-  console.log('shshsh',data)
+  console.log('shshsh',data.id)
 
 
    puzzleService.delete({ id:data.id} , function(data) {

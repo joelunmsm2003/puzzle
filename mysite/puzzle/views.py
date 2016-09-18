@@ -68,6 +68,20 @@ def puzzle(request):
 def puzzleid(request,id):
 
 
+	print 'sjsjsjsjjsjsjs',request.method
+
+	
+	if str(request.method) == str("DELETE"):
+
+		print 'Deleting..........'
+
+		Puzzle.objects.filter(id=id).delete()
+
+		data_json = simplejson.dumps('rooms')
+
+		return HttpResponse(data_json, content_type="application/json")
+
+
 	if request.method == 'GET':
 
 		puzzle = Puzzle.objects.filter(id=id).values('id','src','rows','cols')
@@ -89,11 +103,3 @@ def puzzleid(request,id):
         data_json = simplejson.dumps('rooms')
 
         return HttpResponse(data_json, content_type="application/json")
-
-	if request.method == 'DELETE':
-
-		Puzzle.objects.filter(id=id).delete()
-
-		data_json = simplejson.dumps('rooms')
-
-		return HttpResponse(data_json, content_type="application/json")
