@@ -124,9 +124,7 @@ angular
   .component('home', {
     templateUrl: 'src/component/home/home.html',
     controller: Home,
-    bindings: {
-      interes: '='
-    }
+
   });
 
 function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,fanService) {
@@ -136,11 +134,19 @@ function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,f
 
     $scope.entry.$save();
 
-    console.log('hahaha',$stateParams)
+    var defered = $q.defer();
 
-    var entry = puzzleService.query({ id:$stateParams.id }, function(data) {
+    $scope.promise = defered.promise;
+
+
+    $scope.puzz = puzzleService.query({ id:$stateParams.id }, function(data) {
+
+
+        defered.resolve(data);
 
         data = data[0]
+
+
 
         $scope.src = data.src
 
@@ -167,8 +173,12 @@ function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,f
 
         $scope.puzzle.shuffle();
 
+
     
     });
+
+
+    console.log('iii',$scope.puzz)
     /*
 
     $scope.rows = 4

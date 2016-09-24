@@ -11,10 +11,22 @@ function Admin($scope,$filter,$http,$q,puzzleService,fanService) {
 
   console.log('porque.....')
 
+    var defered = $q.defer();
+
+    $scope.promise = defered.promise;
+
+        $scope.puzz = puzzleService.query({ id:1}, function(data) {
+
+
+        defered.resolve(data);
+
+
+    
+    });
 
 
 
-
+$scope.name = $scope.entry
 
 
 $scope.entry = new fanService(); 
