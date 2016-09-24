@@ -4,7 +4,9 @@ angular
  
 
 
-host = 'http://localhost:8000/' 
+//host = 'http://localhost:8000/'
+
+host = 'http://andyjo.tk:3000/' 
 
 var lang = 'es'
 
@@ -84,6 +86,25 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
 
 angular
   .module('app')
+  .factory('ctrlService', function ($resource) {
+
+	 
+	   
+
+		return $resource(host+'control/:id/', {
+            id: '@_id'
+        }, { //parameters default
+            update: {
+                method: 'PUT'
+            }
+        });
+
+	});
+
+
+
+angular
+  .module('app')
   .factory('fanService', function ($resource) {
 
 	 
@@ -109,25 +130,6 @@ angular
 	   
 
 		return $resource(host+'puzzle/:id/', {
-            id: '@_id'
-        }, { //parameters default
-            update: {
-                method: 'PUT'
-            }
-        });
-
-	});
-
-
-
-angular
-  .module('app')
-  .factory('ctrlService', function ($resource) {
-
-	 
-	   
-
-		return $resource(host+'control/:id/', {
             id: '@_id'
         }, { //parameters default
             update: {
