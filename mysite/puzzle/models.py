@@ -76,6 +76,33 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
+class Component(models.Model):
+    name = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'component'
+
+
+class Control(models.Model):
+    ip = models.CharField(max_length=100, blank=True, null=True)
+    date = models.DateTimeField(blank=True, null=True)
+    nclicks = models.IntegerField(blank=True, null=True)
+    data = models.CharField(max_length=1000, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'control'
+
+
+class CorsheadersCorsmodel(models.Model):
+    cors = models.CharField(max_length=255)
+
+    class Meta:
+        managed = False
+        db_table = 'corsheaders_corsmodel'
+
+
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -120,11 +147,61 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
+class Fan(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='user', blank=True, null=True)
+    ip = models.ForeignKey('Ip', models.DO_NOTHING, db_column='ip', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'fan'
+
+
+class Fancomponent(models.Model):
+    fan = models.ForeignKey(Fan, models.DO_NOTHING, db_column='fan', blank=True, null=True)
+    component = models.ForeignKey(Component, models.DO_NOTHING, db_column='component', blank=True, null=True)
+    nclicks = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'fancomponent'
+
+
+class Ip(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    place = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'ip'
+
+
 class Puzzle(models.Model):
     src = models.CharField(max_length=200, blank=True, null=True)
     rows = models.IntegerField(blank=True, null=True)
     cols = models.IntegerField(blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    nclicks = models.IntegerField(blank=True, null=True)
+    ip = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'puzzle'
+
+
+class Puzzlefan(models.Model):
+    puzzle = models.ForeignKey(Puzzle, models.DO_NOTHING, db_column='puzzle', blank=True, null=True)
+    fan = models.ForeignKey(Fan, models.DO_NOTHING, db_column='fan', blank=True, null=True)
+    nclicks = models.IntegerField(blank=True, null=True)
+    reaction = models.ForeignKey('Reaction', models.DO_NOTHING, db_column='reaction', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'puzzlefan'
+
+
+class Reaction(models.Model):
+    name = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'reaction'

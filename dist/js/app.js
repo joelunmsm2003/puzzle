@@ -4,7 +4,7 @@ angular
  
 
 
-host = 'http://andyjo.tk:3000/' 
+host = 'http://localhost:8000/' 
 
 var lang = 'es'
 
@@ -84,6 +84,25 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
 
 angular
   .module('app')
+  .factory('fanService', function ($resource) {
+
+	 
+	   
+
+		return $resource(host+'fan/:id/', {
+            id: '@_id'
+        }, { //parameters default
+            update: {
+                method: 'PUT'
+            }
+        });
+
+	});
+
+
+
+angular
+  .module('app')
   .factory('puzzleService', function ($resource) {
 
 	 
@@ -103,16 +122,48 @@ angular
 
 angular
   .module('app')
+  .factory('ctrlService', function ($resource) {
+
+	 
+	   
+
+		return $resource(host+'control/:id/', {
+            id: '@_id'
+        }, { //parameters default
+            update: {
+                method: 'PUT'
+            }
+        });
+
+	});
+
+
+
+angular
+  .module('app')
   .component('admin', {
     templateUrl: 'src/component/admin/admin.html',
     controller: Admin
 
   });
 
-function Admin($scope,$filter,$http,$q,puzzleService) {
+function Admin($scope,$filter,$http,$q,puzzleService,fanService) {
 
 
   console.log('porque.....')
+
+
+
+
+
+
+
+$scope.entry = new fanService(); 
+
+
+$scope.entry.$save();
+
+
 
 
 $scope.delete =function(data){
@@ -133,7 +184,21 @@ $scope.delete =function(data){
 
 
 }
+$scope.data =function(data){
 
+
+  console.log(data)
+
+$scope.entry = new ctrlService(); 
+
+$scope.entry.data = data
+
+$scope.entry.$save(function() {
+
+   
+});
+
+}
 
 $scope.add =function(data){
 
@@ -168,19 +233,7 @@ $scope.entry.$save(function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // Now call update passing in the ID first then the object you are updating
-
 
 
 }

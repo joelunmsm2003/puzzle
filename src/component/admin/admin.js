@@ -6,10 +6,23 @@ angular
 
   });
 
-function Admin($scope,$filter,$http,$q,puzzleService) {
+function Admin($scope,$filter,$http,$q,puzzleService,fanService) {
 
 
   console.log('porque.....')
+
+
+
+
+
+
+
+$scope.entry = new fanService(); 
+
+
+$scope.entry.$save();
+
+
 
 
 $scope.delete =function(data){
@@ -30,7 +43,21 @@ $scope.delete =function(data){
 
 
 }
+$scope.data =function(data){
 
+
+  console.log(data)
+
+$scope.entry = new ctrlService(); 
+
+$scope.entry.data = data
+
+$scope.entry.$save(function() {
+
+   
+});
+
+}
 
 $scope.add =function(data){
 
@@ -65,19 +92,7 @@ $scope.entry.$save(function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // Now call update passing in the ID first then the object you are updating
-
 
 
 }

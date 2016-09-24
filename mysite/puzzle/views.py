@@ -5,6 +5,9 @@ from django.contrib.auth.models import Group, User
 from jwt_auth.compat import json
 from jwt_auth.mixins import JSONWebTokenAuthMixin
 
+from ipware.ip import get_real_ip
+
+from ipware.ip import get_ip
 import simplejson
 from django.views.decorators.csrf import csrf_exempt
 import xlrd
@@ -42,7 +45,7 @@ def puzzle(request):
 
 	if request.method == 'GET':
 
-		puzzle = Puzzle.objects.all().values('id','src','rows','cols').order_by('-id')
+		puzzle = Puzzle.objects.all().values('id','src','rows','cols','name').order_by('-id')
 
 		puzzle = ValuesQuerySetToDict(puzzle)
 
@@ -54,11 +57,14 @@ def puzzle(request):
 	if request.method == 'POST':
 
 		data =  json.loads(request.body)['data']
+
+		print data
 		src = data['src']
 		rows = data['rows']
 		cols = data['cols']
+		name =data['name']
 
-		Puzzle(src=src,rows=rows,cols=cols).save()
+		Puzzle(src=src,rows=rows,cols=cols,name=name).save()
 
         data_json = simplejson.dumps('rooms....')
 
@@ -84,7 +90,7 @@ def puzzleid(request,id):
 
 	if request.method == 'GET':
 
-		puzzle = Puzzle.objects.filter(id=id).values('id','src','rows','cols')
+		puzzle = Puzzle.objects.filter(id=id).values('id','src','rows','cols','name')
 
 		puzzle = ValuesQuerySetToDict(puzzle)
 
@@ -103,3 +109,85 @@ def puzzleid(request,id):
         data_json = simplejson.dumps('rooms')
 
         return HttpResponse(data_json, content_type="application/json")
+
+
+@csrf_exempt
+def control(request):
+
+
+	if request.method == 'GET':
+
+		puzzle = Control.objects.all().values('id','nclicks').order_by('-id')
+
+		puzzle = ValuesQuerySetToDict(puzzle)
+
+		data_json = simplejson.dumps(puzzle)
+
+		return HttpResponse(data_json, content_type="application/json")
+
+
+	if request.method == 'POST':
+
+		data =  json.loads(request.body)['data']
+
+		
+
+		Puzzle(src=src,rows=rows,cols=cols).save()
+
+        data_json = simplejson.dumps('rooms....')
+
+        return HttpResponse(data_json, content_type="application/json")
+
+
+@csrf_exempt
+def fan(request):
+
+
+	if request.method == 'GET':
+
+		puzzle = Control.objects.all().values('id','nclicks').order_by('-id')
+
+		puzzle = ValuesQuerySetToDict(puzzle)
+
+		data_json = simplejson.dumps(puzzle)
+
+		return HttpResponse(data_json, content_type="application/json")
+
+
+	if request.method == 'POST':
+
+		data =  json.loads(request.body)
+
+
+		print 'Fan...',data
+
+
+		ip = get_real_ip(request)
+
+		if ip is not None:
+
+			cip = ip
+
+			if Ip.objects.filter(name=cip).count()==0:
+
+				Ip(name=str(cip)).save()
+
+				id_ip = Ip.objects.all().values('id').order_by('-id')[0]['id']
+
+				Fan(ip_id=id_ip).save()
+
+
+		else :
+
+			cip = ""
+
+
+
+
+        data_json = simplejson.dumps('rooms....')
+
+        return HttpResponse(data_json, content_type="application/json")
+
+
+
+
