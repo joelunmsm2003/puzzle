@@ -129,7 +129,12 @@ angular
     }
   });
 
-function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService) {
+function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,fanService) {
+
+
+    $scope.entry = new fanService(); 
+
+    $scope.entry.$save();
 
     console.log('hahaha',$stateParams)
 
