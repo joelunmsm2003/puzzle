@@ -20,11 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< HEAD
+
 SECRET_KEY = 'asi2#pmnxi5c_4%jz7yfl@&5rup&$s!+rv(8&13-h(1t=0d1_l'
-=======
-SECRET_KEY = 'fe2_7a6msspi$_$wimu^9m6c658f!rtf452oz$5&!@t18hr*o('
->>>>>>> frontend
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,20 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'project',
-]
-
-MIDDLEWARE_CLASSES = [
-    'django.middleware.security.SecurityMiddleware',
-=======
     'corsheaders',
     'puzzle',
 ]
 
 MIDDLEWARE_CLASSES = [
     #'django.middleware.security.SecurityMiddleware',
->>>>>>> frontend
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -62,20 +54,16 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
-=======
     'corsheaders.middleware.CorsMiddleware',
->>>>>>> frontend
+
 ]
 
 ROOT_URLCONF = 'mysite.urls'
 
-<<<<<<< HEAD
-=======
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 
->>>>>>> frontend
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -103,22 +91,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'system',
         'USER': 'root',
-<<<<<<< HEAD
-        'PASSWORD': '123',
-        'HOST': '127.0.0.1', 
-=======
         'PASSWORD': 'elenaunmsm2003',
         'HOST': 'tenmass.tk', 
->>>>>>> frontend
         'PORT': '3306',
     }
 }
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> frontend
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
