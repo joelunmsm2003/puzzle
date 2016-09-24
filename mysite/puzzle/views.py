@@ -47,6 +47,18 @@ def puzzle(request):
 
 		puzzle = Puzzle.objects.all().values('id','src','rows','cols','name').order_by('-id')
 
+		for i in range(len(puzzle)):
+
+			p =Puzzlefan.objects.filter(puzzle_id=puzzle[i]['id']) 
+
+			c=0
+			
+			for p in p:
+
+				c = p.nclicks +c
+			
+			puzzle[i]['nclicks'] = c 
+
 		puzzle = ValuesQuerySetToDict(puzzle)
 
 		data_json = simplejson.dumps(puzzle)
@@ -153,7 +165,6 @@ def fan(request):
 
 		return HttpResponse(data_json, content_type="application/json")
 
-
 	if request.method == 'POST':
 
 		data =  json.loads(request.body)
@@ -162,20 +173,15 @@ def fan(request):
 		print 'Fan...',data
 
 
-		ip = get_real_ip(request)
+		ip = get_ip(request)
 
 		if ip is not None:
 
 			cip = ip
 
-			if Ip.objects.filter(name=cip).count()==0:
+			if Fan.objects.filter(ip=cip).count()==0:
 
-				Ip(name=str(cip)).save()
-
-				id_ip = Ip.objects.all().values('id').order_by('-id')[0]['id']
-
-				Fan(ip_id=id_ip).save()
-
+				Fan(ip=str(cip)).save()
 
 		else :
 
@@ -187,6 +193,48 @@ def fan(request):
         data_json = simplejson.dumps('rooms....')
 
         return HttpResponse(data_json, content_type="application/json")
+
+
+
+@csrf_exempt
+def fanpuzzle(request):
+
+
+	if request.method == 'POST':
+
+		data =  json.loads(request.body)['data']
+
+		ip = get_ip(request)
+
+		print data
+
+		puzzle = data['id']
+
+		if Puzzlefan.objects.filter(fan__ip=ip,puzzle_id=puzzle).count() > 0:
+
+			puzzlefan = Puzzlefan.objects.get(fan__ip=ip,puzzle_id=puzzle)
+
+			nclicks = puzzlefan.nclicks
+
+			nclicks = nclicks + 1
+
+			puzzlefan.nclicks = nclicks
+
+			puzzlefan.save()
+
+		else:
+
+			fan =Fan.objects.get(ip=ip)
+
+			Puzzlefan(fan_id=fan.id,puzzle_id=puzzle,nclicks=0).save()
+
+
+
+
+        data_json = simplejson.dumps('rooms....')
+
+        return HttpResponse(data_json, content_type="application/json")
+
 
 
 

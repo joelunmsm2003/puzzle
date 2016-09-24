@@ -6,7 +6,7 @@ angular
 
   });
 
-function Admin($scope,$filter,$http,$q,puzzleService,fanService,ctrlService) {
+function Admin($scope,$location,$filter,$http,$q,puzzleService,fanService,fanpuzzleService) {
 
 
   console.log('porque.....')
@@ -60,9 +60,25 @@ $scope.data =function(data){
 
   console.log(data)
 
+$scope.entry = new fanpuzzleService(); 
+
+$scope.entry.data = data
+
+$scope.entry.$save();
+
 
 
 }
+
+
+$scope.go =function(data){
+
+$location.path('/puzzle/'+data.id)
+
+}
+
+
+
 
 $scope.add =function(data){
 
@@ -90,6 +106,8 @@ $scope.entry.$save(function() {
   var entries = puzzleService.query(function() {
    
     $scope.puzzles = entries
+
+
 
     console.log($scope.puzzles)
 

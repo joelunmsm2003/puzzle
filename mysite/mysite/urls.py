@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^puzzle/(\d+)', 'puzzle.views.puzzleid'),
     url(r'^control/', 'puzzle.views.control'),
     url(r'^fan$', 'puzzle.views.fan'),
+    url(r'^fan/puzzle$', 'puzzle.views.fanpuzzle'),
 
 
 

@@ -127,7 +127,7 @@ angular
 
   });
 
-function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,fanService,ctrlService) {
+function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,fanService,fanpuzzleService) {
 
 
     $scope.entry = new fanService(); 
@@ -138,6 +138,19 @@ function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,f
 
     $scope.promise = defered.promise;
 
+    $scope.data =function(data){
+        console.log($scope.info)
+
+
+    $scope.entry = new fanpuzzleService(); 
+
+    $scope.entry.data = $scope.info
+
+    $scope.entry.$save();
+
+
+    }
+
 
     $scope.puzz = puzzleService.query({ id:$stateParams.id }, function(data) {
 
@@ -146,6 +159,7 @@ function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,f
 
         data = data[0]
 
+        $scope.info = data
 
 
         $scope.src = data.src
@@ -178,7 +192,6 @@ function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,f
     });
 
 
-    console.log('iii',$scope.puzz)
     /*
 
     $scope.rows = 4

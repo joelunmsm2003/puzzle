@@ -8,6 +8,14 @@ color:#337AB7;
 
 }
 
+.panel-default > .panel-heading {
+    color: #333333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    font-size:12px;
+    font-family: 'Open Sans', sans-serif;
+}
+
 .panel-body {
     padding: 15px;
     height: 250px;

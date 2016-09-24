@@ -18,7 +18,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
 
 
   
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/admin');
 
  
 

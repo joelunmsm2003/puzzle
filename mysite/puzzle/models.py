@@ -149,7 +149,7 @@ class DjangoSession(models.Model):
 
 class Fan(models.Model):
     user = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='user', blank=True, null=True)
-    ip = models.ForeignKey('Ip', models.DO_NOTHING, db_column='ip', blank=True, null=True)
+    ip = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False

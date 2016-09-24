@@ -13,6 +13,20 @@ angular
             }
         });
 
-	});
+	})
+  .factory('fanpuzzleService', function ($resource) {
+
+   
+     
+
+    return $resource(host+'fan/puzzle/:id/', {
+            id: '@_id'
+        }, { //parameters default
+            update: {
+                method: 'PUT'
+            }
+        });
+
+  });
 
 
