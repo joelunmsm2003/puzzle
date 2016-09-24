@@ -6,12 +6,40 @@ angular
 
   });
 
-function Admin($scope,$filter,$http,$q,puzzleService) {
+function Admin($scope,$filter,$http,$q,puzzleService,fanService) {
+
+
+  console.log('porque.....')
+
+    var defered = $q.defer();
+
+    $scope.promise = defered.promise;
+
+        $scope.puzz = puzzleService.query({ id:1}, function(data) {
+
+
+        defered.resolve(data);
+
+
+    
+    });
+
+
+
+$scope.name = $scope.entry
+
+
+$scope.entry = new fanService(); 
+
+
+$scope.entry.$save();
+
+
 
 
 $scope.delete =function(data){
 
-  console.log('shshsh',data)
+  console.log('shshsh',data.id)
 
 
    puzzleService.delete({ id:data.id} , function(data) {
@@ -27,7 +55,21 @@ $scope.delete =function(data){
 
 
 }
+$scope.data =function(data){
 
+
+  console.log(data)
+
+$scope.entry = new ctrlService(); 
+
+$scope.entry.data = data
+
+$scope.entry.$save(function() {
+
+   
+});
+
+}
 
 $scope.add =function(data){
 
@@ -49,41 +91,20 @@ $scope.entry.$save(function() {
 
 }
 
- var entry = puzzleService.get({ id:'1' }, function(data) {
-    console.log('puzzles',data);
-  }); 
+
 
 
   var entries = puzzleService.query(function() {
    
     $scope.puzzles = entries
 
+    console.log($scope.puzzles)
+
   }); 
 
 
 
-
-
-
-
-
-
-
-
-
-    puzzleService.get({ id:'1' },function(data) {
-
-    data.src = '8888'
-   
-    puzzleService.update({ id:'1' }, data);
-  
-
-  });
-
-
-
 // Now call update passing in the ID first then the object you are updating
-
 
 
 }

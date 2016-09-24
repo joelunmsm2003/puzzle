@@ -1,11 +1,11 @@
 angular
   .module('app')
-  .factory('puzzleService', function ($resource) {
+  .factory('ctrlService', function ($resource) {
 
 	 
 	   
 
-		return $resource(host+'puzzle/:id/', {
+		return $resource(host+'control/:id/', {
             id: '@_id'
         }, { //parameters default
             update: {

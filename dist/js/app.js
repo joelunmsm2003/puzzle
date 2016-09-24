@@ -3,7 +3,10 @@ angular
   .config(routesConfig)
  
 
-host = 'http://localhost:8000' 
+
+//host = 'http://localhost:8000/'
+
+host = 'http://andyjo.tk:3000/' 
 
 
 var lang = 'es'
@@ -84,12 +87,50 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider,$htt
 
 angular
   .module('app')
+  .factory('ctrlService', function ($resource) {
+
+	 
+	   
+
+		return $resource(host+'control/:id/', {
+            id: '@_id'
+        }, { //parameters default
+            update: {
+                method: 'PUT'
+            }
+        });
+
+	});
+
+
+
+angular
+  .module('app')
+  .factory('fanService', function ($resource) {
+
+	 
+	   
+
+		return $resource(host+'fan/:id/', {
+            id: '@_id'
+        }, { //parameters default
+            update: {
+                method: 'PUT'
+            }
+        });
+
+	});
+
+
+
+angular
+  .module('app')
   .factory('puzzleService', function ($resource) {
 
 	 
 	   
 
-		return $resource(host+'puzzle/:id', {
+		return $resource(host+'puzzle/:id/', {
             id: '@_id'
         }, { //parameters default
             update: {
@@ -109,12 +150,40 @@ angular
 
   });
 
-function Admin($scope,$filter,$http,$q,puzzleService) {
+function Admin($scope,$filter,$http,$q,puzzleService,fanService) {
+
+
+  console.log('porque.....')
+
+    var defered = $q.defer();
+
+    $scope.promise = defered.promise;
+
+        $scope.puzz = puzzleService.query({ id:1}, function(data) {
+
+
+        defered.resolve(data);
+
+
+    
+    });
+
+
+
+$scope.name = $scope.entry
+
+
+$scope.entry = new fanService(); 
+
+
+$scope.entry.$save();
+
+
 
 
 $scope.delete =function(data){
 
-  console.log('shshsh',data)
+  console.log('shshsh',data.id)
 
 
    puzzleService.delete({ id:data.id} , function(data) {
@@ -130,7 +199,21 @@ $scope.delete =function(data){
 
 
 }
+$scope.data =function(data){
 
+
+  console.log(data)
+
+$scope.entry = new ctrlService(); 
+
+$scope.entry.data = data
+
+$scope.entry.$save(function() {
+
+   
+});
+
+}
 
 $scope.add =function(data){
 
@@ -152,41 +235,20 @@ $scope.entry.$save(function() {
 
 }
 
- var entry = puzzleService.get({ id:'1' }, function(data) {
-    console.log('puzzles',data);
-  }); 
+
 
 
   var entries = puzzleService.query(function() {
    
     $scope.puzzles = entries
 
+    console.log($scope.puzzles)
+
   }); 
 
 
 
-
-
-
-
-
-
-
-
-
-    puzzleService.get({ id:'1' },function(data) {
-
-    data.src = '8888'
-   
-    puzzleService.update({ id:'1' }, data);
-  
-
-  });
-
-
-
 // Now call update passing in the ID first then the object you are updating
-
 
 
 }
@@ -197,11 +259,40 @@ angular
   
   .component('header', {
     templateUrl: 'src/component/header/header.html',
-    controller: Header
+    controller: Header,
+    bindings: {
+      name: '='
+    }
 
   });
 
 function Header($scope,$filter,$http,$q) {
+
+	console.log('gsgsgsg',this.name)
+
+	$scope.name = 'Puzzle'
+
+	
+
+		this.name.then(function(data) {
+
+		if(data[0]){
+
+			$scope.name=data[0].name
+
+		}
+
+
+    	
+
+  	});
+
+
+
+
+
+
+
 
 
 
@@ -334,26 +425,39 @@ angular
   .component('home', {
     templateUrl: 'src/component/home/home.html',
     controller: Home,
-    bindings: {
-      interes: '='
-    }
+
   });
 
-function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService) {
+function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,fanService) {
 
-    console.log('hahaha',$stateParams)
 
-    var entry = puzzleService.get({ id:$stateParams.id }, function(data) {
+    $scope.entry = new fanService(); 
 
-        $scope.src = data.data.src
+    $scope.entry.$save();
 
-        $scope.rows = data.data.rows
+    var defered = $q.defer();
 
-        $scope.cols = data.data.cols
+    $scope.promise = defered.promise;
+
+
+    $scope.puzz = puzzleService.query({ id:$stateParams.id }, function(data) {
+
+
+        defered.resolve(data);
+
+        data = data[0]
+
+
+
+        $scope.src = data.src
+
+        $scope.rows = data.rows
+
+        $scope.cols = data.cols
 
         var img = new Image();
        
-        img.src = data.data.src
+        img.src = data.src
 
         $scope.puzzle = slidingPuzzle($scope.rows, $scope.cols);
 
@@ -370,8 +474,12 @@ function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService) 
 
         $scope.puzzle.shuffle();
 
+
     
     });
+
+
+    console.log('iii',$scope.puzz)
     /*
 
     $scope.rows = 4
