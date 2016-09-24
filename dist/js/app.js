@@ -150,7 +150,7 @@ angular
 
   });
 
-function Admin($scope,$filter,$http,$q,puzzleService,fanService) {
+function Admin($scope,$filter,$http,$q,puzzleService,fanService,ctrlService) {
 
 
   console.log('porque.....')
@@ -204,14 +204,7 @@ $scope.data =function(data){
 
   console.log(data)
 
-$scope.entry = new ctrlService(); 
 
-$scope.entry.data = data
-
-$scope.entry.$save(function() {
-
-   
-});
 
 }
 
@@ -428,7 +421,7 @@ angular
 
   });
 
-function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,fanService) {
+function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,fanService,ctrlService) {
 
 
     $scope.entry = new fanService(); 

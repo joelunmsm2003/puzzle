@@ -127,7 +127,7 @@ angular
 
   });
 
-function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,fanService) {
+function Home($scope,$filter,$http,$q,slidingPuzzle,$stateParams,puzzleService,fanService,ctrlService) {
 
 
     $scope.entry = new fanService(); 
