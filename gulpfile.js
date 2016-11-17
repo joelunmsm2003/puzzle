@@ -41,8 +41,9 @@ gulp.task('app-js', function() {
 	// Grab your custom scripts
 	
 	'./rutas.js',
-	'./src/service/**/*.js',
+	
 	'./src/component/**/*.js',
+	'./src/service/**/*.js',
 				
 	])
 		.pipe(plumber())
@@ -131,7 +132,8 @@ gulp.task('watch', function() {
 
 	gulp.watch('./src/**/*.js', ['app-js']);
 
-	
+	gulp.watch('./src/*.js', ['app-js']);
+
 
 	// Watch vendor-js files
 	gulp.watch('./bower_components/**/*.js', ['vendor-js']);

@@ -47,6 +47,7 @@ def puzzle(request):
 
 		puzzle = Puzzle.objects.all().values('id','src','rows','cols','name').order_by('-id')
 
+		
 		for i in range(len(puzzle)):
 
 			p =Puzzlefan.objects.filter(puzzle_id=puzzle[i]['id']) 
@@ -57,9 +58,13 @@ def puzzle(request):
 
 				c = p.nclicks +c
 			
-			puzzle[i]['nclicks'] = c 
+			puzzle[i]['nclicks'] = str(c) 
+
+		
 
 		puzzle = ValuesQuerySetToDict(puzzle)
+
+		print type(puzzle),puzzle
 
 		data_json = simplejson.dumps(puzzle)
 

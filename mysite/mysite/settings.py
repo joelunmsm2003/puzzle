@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'system',
+        'NAME': 'puzzle',
         'USER': 'root',
-        'PASSWORD': 'elenaunmsm2003',
-        'HOST': 'tenmass.tk', 
+        'PASSWORD': '123',
+        'HOST': 'localhost', 
         'PORT': '3306',
     }
 }

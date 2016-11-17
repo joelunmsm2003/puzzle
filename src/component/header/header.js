@@ -16,6 +16,7 @@ function Header($scope,$filter,$http,$q) {
 
 	$scope.name = 'Puzzle'
 
+
 	
 
 		this.name.then(function(data) {
